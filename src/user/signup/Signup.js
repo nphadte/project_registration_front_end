@@ -27,6 +27,15 @@ class Signup extends Component {
             },
             password: {
                 value: ''
+            },
+            company: {
+                value: ''
+            },
+            phone: {
+                value: ''
+            },
+            bdm: {
+                value: ''
             }
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -56,7 +65,10 @@ class Signup extends Component {
             name: this.state.name.value,
             email: this.state.email.value,
             username: this.state.username.value,
-            password: this.state.password.value
+            password: this.state.password.value,
+            company: this.state.company.value,
+            phone: this.state.phone.value,
+            bdm: this.state.bdm.value
         };
         signup(signupRequest)
         .then(response => {
@@ -77,7 +89,7 @@ class Signup extends Component {
         return !(this.state.name.validateStatus === 'success' &&
             this.state.username.validateStatus === 'success' &&
             this.state.email.validateStatus === 'success' &&
-            this.state.password.validateStatus === 'success'
+            this.state.password.validateStatus === 'success' 
         );
     }
 
@@ -139,6 +151,27 @@ class Signup extends Component {
                                 placeholder="A password between 6 to 20 characters" 
                                 value={this.state.password.value} 
                                 onChange={(event) => this.handleInputChange(event, this.validatePassword)} />    
+                        </FormItem>
+                        <FormItem
+                            label="Company"
+                            help={this.state.company.errorMsg}>
+                            <Input
+                                size="large"
+                                name="company"
+                                autoComplete="off"
+                                placeholder="Your Company name"
+                                value={this.state.company.value} />
+                        </FormItem>
+                        <FormItem
+                            label="Phone"
+                            help={this.state.phone.errorMsg}>
+                            <Input
+                                size="large"
+                                name="Phone number"
+                                autoComplete="on"
+                                placeholder="Your Contact Phone number"
+                                value={this.state.phone.value}
+                                onChange={(event) => this.handleInputChange(event, this.validatePhoneNumber)} />
                         </FormItem>
                         <FormItem>
                             <Button type="primary" 
@@ -347,6 +380,27 @@ class Signup extends Component {
                 validateStatus: 'success',
                 errorMsg: null,
             };            
+        }
+    }
+
+    validatePhoneNumber = ( phone ) => {
+        const PHONE_REGEX = RegExp('^[1-9]\d{2}-\d{3}-\d{4}');
+
+        if ( phone.length != 9 ){
+            return {
+                validateStatus: 'error',
+                errorMsg: `Phone number needs to be 9 digit.`
+            }
+        } else if (!PHONE_REGEX.test(phone) ){
+            return {
+                validateStatus: 'error',
+                errorMsg: `Phone number can only be digits.`
+            }
+        } else {
+            return {
+                validateStatus: 'success',
+                errorMsg: null,
+            };    
         }
     }
 
