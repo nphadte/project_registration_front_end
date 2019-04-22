@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "CONTAINER_IDENTIFIER": "MEDUB6533492FBIU0517218",
+      "WAREHOUSE_LOC": "CLD",
+      "BOL_NUMBER": "MEDUB6533492",
+      "CONTAINER_NUMBER": "FBIU0517218",
+      "CONTAINER_STATUS": "",
+      "GATE_NUM": "12",
+      "DRAYAGE": "BRAR" ,
+      "CARRIER_NAME": "" ,
+      "LFD_CONTAINER": "" ,
+      "LFD_CHASIS":  "" ,
+      "WH_CHECKED_IN_USER":  "BALJEET",
+      "WH_CHECKED_IN_DATETIME": "2019/01/25"
+    },
+    {
+      "CONTAINER_IDENTIFIER": "MEDUS5982294FBIU0299395",
+      "WAREHOUSE_LOC": "HUN",
+      "BOL_NUMBER": "MEDUS5982294",
+      "CONTAINER_NUMBER": "FBIU0299395",
+      "CONTAINER_STATUS": "",
+      "GATE_NUM": "11",
+      "DRAYAGE": "BRAR" ,
+      "CARRIER_NAME": "" ,
+      "LFD_CONTAINER": "" ,
+      "LFD_CHASIS": ""  ,
+      "WH_CHECKED_IN_USER":  "DUNCAN",
+      "WH_CHECKED_IN_DATETIME": "2019/01/25"
+    },
+    {
+      "CONTAINER_IDENTIFIER": "MEDUS6439799MEDU6753299",
+      "WAREHOUSE_LOC": "CLD",
+      "BOL_NUMBER": "MEDUS6439799",
+      "CONTAINER_NUMBER": "MEDU6753299",
+      "CONTAINER_STATUS": "",
+      "GATE_NUM": "12",
+      "DRAYAGE": "BRAR" ,
+      "CARRIER_NAME": "" ,
+      "LFD_CONTAINER": "" ,
+      "LFD_CHASIS":  "" ,
+      "WH_CHECKED_IN_USER":  "JAGGY",
+      "WH_CHECKED_IN_DATETIME": "2019/01/19"
+    },
+    {
+      "CONTAINER_IDENTIFIER": "MEDUDA268504MEDU1290890",
+      "WAREHOUSE_LOC": "HUN",
+      "BOL_NUMBER": "MEDUDA268504",
+      "CONTAINER_NUMBER": "MEDU1290890",
+      "CONTAINER_STATUS": "",
+      "GATE_NUM": "12",
+      "DRAYAGE": "BRAR" ,
+      "CARRIER_NAME": "" ,
+      "LFD_CONTAINER": "" ,
+      "LFD_CHASIS":  "" ,
+      "WH_CHECKED_IN_USER":  "DRAKE",
+      "WH_CHECKED_IN_DATETIME": "2019/01/17"
+    }
+  ]
+}
