@@ -144,7 +144,7 @@ class PollList extends Component {
     render() {
         return (
             <div className="polls-container">
-               <h1> Display an carousel</h1>
+               <h1> need to discuss as to what gets displayed for all begin logging in or even signing up</h1>
             </div>
         );
     }

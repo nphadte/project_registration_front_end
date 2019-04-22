@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import './NewProject.css';
+import './NewProject1.css';
+
+import { Link } from 'react-router-dom';
 
 import { Form, Input, Button, notification } from 'antd';
-const NewProjectFormItem = Form.Item;
+const FormItem = Form.Item;
 
-class Signup extends Component {
+class NewProject1 extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -76,14 +78,16 @@ class Signup extends Component {
                 }
             ]
         }
+        /*
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.validateUsernameAvailability = this.validateUsernameAvailability.bind(this);
         this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
         this.isFormInvalid = this.isFormInvalid.bind(this);
+        */
     }
 
-    
+    /*
     handleSubmit(event) {
         event.preventDefault();
 
@@ -118,6 +122,7 @@ class Signup extends Component {
             this.state.password.validateStatus === 'success'
         );
     }
+    */
 
     render() {
         return (
@@ -212,7 +217,6 @@ class Signup extends Component {
             </div>
         );
     }
+}
 
-    
-
-export default Signup;
+    export default NewProject1;
