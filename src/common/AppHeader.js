@@ -32,7 +32,7 @@ class AppHeader extends Component {
             </Menu.Item>,
             <Menu.Item key="/project/new">
             <Link to="/project/new">
-              <img src={pollIcon} alt="project" className="poll-icon" />
+              <img src={pollIcon} alt="create new project"  className="poll-icon" />
             </Link>
           </Menu.Item>,
           <Menu.Item key="/profile" className="profile-menu">

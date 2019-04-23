@@ -152,23 +152,29 @@ class Signup extends Component {
                                 value={this.state.password.value} 
                                 onChange={(event) => this.handleInputChange(event, this.validatePassword)} />    
                         </FormItem>
+
                         <FormItem
-                            label="Company"
+                            label="Company Name"
+                            validateStatus={this.state.company.validateStatus}
                             help={this.state.company.errorMsg}>
                             <Input
                                 size="large"
                                 name="company"
                                 autoComplete="off"
-                                placeholder="Your Company name"
-                                value={this.state.company.value} />
+                                placeholder="Your Comapny name"
+                                value={this.state.company.value}
+                                onChange={(event) => this.handleInputChange(event, this.validateName)} />
                         </FormItem>
+
+
                         <FormItem
                             label="Phone"
+                            validateStatus={this.state.phone.validatePhoneNumber}
                             help={this.state.phone.errorMsg}>
                             <Input
                                 size="large"
-                                name="Phone number"
-                                autoComplete="on"
+                                name="phone"
+                                autoComplete="off"
                                 placeholder="Your Contact Phone number"
                                 value={this.state.phone.value}
                                 onChange={(event) => this.handleInputChange(event, this.validatePhoneNumber)} />
