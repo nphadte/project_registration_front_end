@@ -184,7 +184,7 @@ class NewProject1 extends Component {
                                 size="large"
                                 className="signup-form-button"
                                 //disabled={this.isFormInvalid()}
-                                >Sign up</Button>
+                                >Submit your Project</Button>
                         </FormItem>
                     </Form>
                 </div>
