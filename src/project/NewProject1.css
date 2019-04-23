@@ -1,0 +1,4 @@
+.Row{
+    display: flexbox;
+    align-content: space-around;
+}

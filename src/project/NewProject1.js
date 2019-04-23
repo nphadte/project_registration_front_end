@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import './NewProject1.css';
+import moment from 'moment';
 
 import { Link } from 'react-router-dom';
 
-import { Form, Input, Button, notification } from 'antd';
+import { Form, Input, Button, notification, Row, Col, DatePicker  } from 'antd';
 const FormItem = Form.Item;
+const dateFormat = 'YYYY/MM/DD';
+const currentDate = new Date().toISOString().substring(0, 10);
 
 class NewProject1 extends Component {
     constructor(props) {
@@ -134,7 +137,15 @@ class NewProject1 extends Component {
             <div className="newproject-container">
                 <h1 className="page-title">Regsiter New Project</h1>
                 <div className="newproject-content">
+                    
                     <Form onSubmit={this.handleSubmit} className="newproject-form">
+                        <Row>
+                            <Col span={6}>
+                                <FormItem     label="Project Date">
+                                    <DatePicker defaultValue={moment(currentDate, dateFormat)} format={dateFormat} />
+                                </FormItem>
+                            </Col>
+                        <Col span={6}> 
                         <FormItem
                             label="Project Name"
                             //validateStatus={this.state.name.validateStatus}
@@ -148,7 +159,8 @@ class NewProject1 extends Component {
                                 //onChange={(event) => this.handleInputChange(event, this.validateName)} 
                                 />
                         </FormItem>
-
+                        </Col>
+                            <Col span={6}> 
                             <FormItem label="Address"
                             validateStatus={this.state.project_details.project_address}
                             help={this.state.project_details.project_address.errorMsg}>
@@ -162,22 +174,76 @@ class NewProject1 extends Component {
                                 //onChange={(event) => this.handleInputChange(event, this.validateUsername)} 
                                 />
                         </FormItem>
+                        </Col>
+                            <Col span={6}> 
                         <FormItem
-                            label="State"
+                            label="City"
                             hasFeedback
                             //validateStatus={this.state.email.validateStatus}
-                            help={this.state.project_details.project_state.errorMsg}>
+                            help={this.state.project_details.project_city.errorMsg}>
                             <Input
                                 size="large"
-                                name="state"
+                                name="city"
                                 //type="email"
                                 autoComplete="off"
                                 placeholder="State"
-                                value={this.state.project_details.project_state}
+                                value={this.state.project_details.project_city}
                                 //onBlur={this.validateEmailAvailability}
                                 //onChange={(event) => this.handleInputChange(event, this.validateEmail)} 
                                 />
                         </FormItem>
+                        </Col>
+                         </Row>
+
+                        <Row>
+                            
+                            <Col span={8}>
+                                <FormItem
+                                    label="State"
+                                    hasFeedback
+                                    //validateStatus={this.state.email.validateStatus}
+                                    help={this.state.project_details.project_state.errorMsg}>
+                                    <Input
+                                        size="large"
+                                        name="state"
+                                        //type="email"
+                                        autoComplete="off"
+                                        placeholder="State"
+                                        value={this.state.project_details.project_state}
+                                    //onBlur={this.validateEmailAvailability}
+                                    //onChange={(event) => this.handleInputChange(event, this.validateEmail)} 
+                                    />
+                                </FormItem>
+                            </Col>
+
+                            <Col span={8}>
+                                <FormItem
+                                    label="Zip"
+                                    hasFeedback
+                                    //validateStatus={this.state.email.validateStatus}
+                                    help={this.state.project_details.project_zipcode.errorMsg}>
+                                    <Input
+                                        size="large"
+                                        name="zip"
+                                        //type="email"
+                                        autoComplete="off"
+                                        placeholder="Zip Code"
+                                        value={this.state.project_details.project_zipcode}
+                                    //onBlur={this.validateEmailAvailability}
+                                    //onChange={(event) => this.handleInputChange(event, this.validateEmail)} 
+                                    />
+                                </FormItem>
+                            </Col>
+
+                            <Col span={8}>
+                                <FormItem label="Tile Install Date">
+                                    <DatePicker defaultValue={moment('2019/04/20',dateFormat)} format={dateFormat} />
+                                </FormItem>
+                            </Col>
+                        </Row>
+
+
+
                         <FormItem>
                             <Button type="primary"
                                 htmlType="submit"
@@ -187,6 +253,7 @@ class NewProject1 extends Component {
                                 >Submit your Project</Button>
                         </FormItem>
                     </Form>
+                    
                 </div>
             </div>
         );
