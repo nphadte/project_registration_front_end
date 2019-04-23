@@ -10,10 +10,10 @@ import { getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from '../constants';
 
 // reokace this with project 
-import PollList from '../poll/PollList';
-import NewPoll from '../poll/NewPoll';
+//import PollList from '../poll/PollList';
+//import NewPoll from '../poll/NewPoll';
+import Carousel from '../project/Carousel';
 import NewProject1 from '../project/NewProject1';
-
 
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
@@ -105,7 +105,7 @@ class App extends Component {
             <div className="container">
               <Switch>      
                 <Route exact path="/" 
-                  render={(props) => <PollList isAuthenticated={this.state.isAuthenticated} 
+                  render={(props) => <Carousel isAuthenticated={this.state.isAuthenticated} 
                       currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
                 </Route>
                 <Route path="/login" 
@@ -114,7 +114,7 @@ class App extends Component {
                 <Route path="/users/:username" 
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewProject1} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/project/new" component={NewProject1} handleLogout={this.handleLogout}></PrivateRoute>
                 <Route component={NotFound}></Route>
               </Switch>
             </div>
