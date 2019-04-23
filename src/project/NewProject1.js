@@ -17,8 +17,11 @@ class NewProject1 extends Component {
                 project_city:       { value: '' },
                 project_state:      { value: '' },
                 project_zipcode:    { value: '' },
-                project_tile_install_date: { value: '' }
-            },
+                project_tile_install_date: { value: '' },
+            }
+        };
+    }
+            /*,
             architect: {
                 first_name:         { value: '' },
                 last_name:          { value: '' },
@@ -78,14 +81,16 @@ class NewProject1 extends Component {
                 }
             ]
         }
+        */
         /*
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.validateUsernameAvailability = this.validateUsernameAvailability.bind(this);
         this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
         this.isFormInvalid = this.isFormInvalid.bind(this);
-        */
+        
     }
+    */
 
     /*
     handleSubmit(event) {
@@ -131,86 +136,55 @@ class NewProject1 extends Component {
                 <div className="newproject-content">
                     <Form onSubmit={this.handleSubmit} className="newproject-form">
                         <FormItem
-                            label="Full Name"
-                            validateStatus={this.state.name.validateStatus}
-                            help={this.state.name.errorMsg}>
+                            label="Project Name"
+                            //validateStatus={this.state.name.validateStatus}
+                            help={this.state.project_details.project_name.errorMsg}>
                             <Input
                                 size="large"
                                 name="name"
                                 autoComplete="off"
                                 placeholder="Your full name"
                                 value={this.state.project_details.project_date.value}
-                                onChange={(event) => this.handleInputChange(event, this.validateName)} />
+                                //onChange={(event) => this.handleInputChange(event, this.validateName)} 
+                                />
                         </FormItem>
-                        <FormItem label="Username"
-                            hasFeedback
-                            validateStatus={this.state.username.validateStatus}
-                            help={this.state.username.errorMsg}>
+
+                            <FormItem label="Address"
+                            validateStatus={this.state.project_details.project_address}
+                            help={this.state.project_details.project_address.errorMsg}>
                             <Input
                                 size="large"
                                 name="username"
                                 autoComplete="off"
                                 placeholder="A unique username"
-                                value={this.state.username.value}
-                                onBlur={this.validateUsernameAvailability}
-                                onChange={(event) => this.handleInputChange(event, this.validateUsername)} />
+                                value={this.state.project_details.project_address}
+                                //onBlur={this.validateUsernameAvailability}
+                                //onChange={(event) => this.handleInputChange(event, this.validateUsername)} 
+                                />
                         </FormItem>
                         <FormItem
-                            label="Email"
+                            label="State"
                             hasFeedback
-                            validateStatus={this.state.email.validateStatus}
-                            help={this.state.email.errorMsg}>
+                            //validateStatus={this.state.email.validateStatus}
+                            help={this.state.project_details.project_state.errorMsg}>
                             <Input
                                 size="large"
-                                name="email"
-                                type="email"
+                                name="state"
+                                //type="email"
                                 autoComplete="off"
-                                placeholder="Your email"
-                                value={this.state.email.value}
-                                onBlur={this.validateEmailAvailability}
-                                onChange={(event) => this.handleInputChange(event, this.validateEmail)} />
-                        </FormItem>
-                        <FormItem
-                            label="Password"
-                            validateStatus={this.state.password.validateStatus}
-                            help={this.state.password.errorMsg}>
-                            <Input
-                                size="large"
-                                name="password"
-                                type="password"
-                                autoComplete="off"
-                                placeholder="A password between 6 to 20 characters"
-                                value={this.state.password.value}
-                                onChange={(event) => this.handleInputChange(event, this.validatePassword)} />
-                        </FormItem>
-                        <FormItem
-                            label="Company"
-                            help={this.state.company.errorMsg}>
-                            <Input
-                                size="large"
-                                name="company"
-                                autoComplete="off"
-                                placeholder="Your Company name"
-                                value={this.state.company.value} />
-                        </FormItem>
-                        <FormItem
-                            label="Phone"
-                            help={this.state.phone.errorMsg}>
-                            <Input
-                                size="large"
-                                name="Phone number"
-                                autoComplete="on"
-                                placeholder="Your Contact Phone number"
-                                value={this.state.phone.value}
-                                onChange={(event) => this.handleInputChange(event, this.validatePhoneNumber)} />
+                                placeholder="State"
+                                value={this.state.project_details.project_state}
+                                //onBlur={this.validateEmailAvailability}
+                                //onChange={(event) => this.handleInputChange(event, this.validateEmail)} 
+                                />
                         </FormItem>
                         <FormItem>
                             <Button type="primary"
                                 htmlType="submit"
                                 size="large"
                                 className="signup-form-button"
-                                disabled={this.isFormInvalid()}>Sign up</Button>
-                            Already registed? <Link to="/login">Login now!</Link>
+                                //disabled={this.isFormInvalid()}
+                                >Sign up</Button>
                         </FormItem>
                     </Form>
                 </div>
