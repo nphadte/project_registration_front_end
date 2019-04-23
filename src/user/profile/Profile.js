@@ -92,22 +92,11 @@ class Profile extends Component {
                                     <div className="user-joined">
                                         Joined {formatDate(this.state.user.joinedAt)}
                                     </div>
+                                    <div className="company">Company:     {this.state.user.company}</div>
+                                    <div className="phone">Phone:   {this.state.user.phone}</div>
+                                    <div className="BDM">Business development Manager: {this.state.user.bdm}</div>
                                 </div>
                             </div>
-                            <div className="user-poll-details">    
-                                <Tabs defaultActiveKey="1" 
-                                    animated={false}
-                                    tabBarStyle={tabBarStyle}
-                                    size="large"
-                                    className="profile-tabs">
-                                    <TabPane tab={`${this.state.user.pollCount} Polls`} key="1">
-                                        <PollList username={this.props.match.params.username} type="USER_CREATED_POLLS" />
-                                    </TabPane>
-                                    <TabPane tab={`${this.state.user.voteCount} Votes`}  key="2">
-                                        <PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />
-                                    </TabPane>
-                                </Tabs>
-                            </div>  
                         </div>  
                     ): null               
                 }
