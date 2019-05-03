@@ -1048,7 +1048,7 @@ class NewProject1 extends Component {
                 </FormItem>
               </Col>
 
-              <Col span={3}>
+              <Col span={4}>
                 <FormItem label="Submitted Date">
                   <DatePicker
                     size="medium"

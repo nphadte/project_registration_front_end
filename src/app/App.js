@@ -140,19 +140,13 @@ class App extends Component {
                 component={NewProject1}
                 handleLogout={this.handleLogout}
               />
-              <Route component={NotFound} />
-              <Route
-                exact
+              <PrivateRoute
+                authenticated={this.state.isAuthenticated}
                 path="/project/list"
-                render={props => (
-                  <ProjectList
-                    isAuthenticated={this.state.isAuthenticated}
-                    currentUser={this.state.currentUser}
-                    handleLogout={this.handleLogout}
-                    {...props}
-                  />
-                )}
+                component={ProjectList}
+                handleLogout={this.handleLogout}
               />
+              <Route component={NotFound} />
             </Switch>
           </div>
         </Content>
