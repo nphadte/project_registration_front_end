@@ -214,10 +214,10 @@ class NewProject1 extends Component {
 
             <Row>
               <Col span={5}>
-                <FormItem label=" First Name">
+                <FormItem label=" Architect First Name">
                   <Input
                     size="large"
-                    name="firstname"
+                    name="architect_first_name"
                     autoComplete="off"
                     placeholder="Architect first name"
                     value={this.state.project_details.architect.first_name}
@@ -295,14 +295,21 @@ class NewProject1 extends Component {
 
             <Row>
               <Col span={5}>
-                <Form.Item label="Company Name">
+                <Form.Item
+                  label="Company Name"
+                  validateStatus={
+                    this.state.project_details.project_name.validateStatus
+                  }
+                  help={this.state.project_details.project_name.errorMsg}
+                >
                   <Input
                     size="large"
-                    name="company name"
+                    name="City"
                     autoComplete="off"
                     placeholder="Company Name"
-                    value={this.state.project_details.architect.company_name}
-                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                    value={
+                      this.state.project_details.architect.company_name.value
+                    }
                   />
                 </Form.Item>
               </Col>
@@ -320,14 +327,13 @@ class NewProject1 extends Component {
                     name="City"
                     autoComplete="off"
                     placeholder="City"
-                    value={this.state.project_details.project_name.value}
+                    value={this.state.project_details.architect.city.value}
                   />
                 </Form.Item>
               </Col>
               <Col span={4}>
                 <FormItem
                   label="State"
-                  name="state"
                   validateStatus={this.state.project_details.project_address}
                   help={this.state.project_details.project_address.errorMsg}
                 >
@@ -352,7 +358,7 @@ class NewProject1 extends Component {
                     name="zip code"
                     //type="email"
                     autoComplete="off"
-                    placeholder="Zip Code"
+                    placeholder="State"
                     value={this.state.project_details.architect.zip}
                   />
                 </FormItem>
