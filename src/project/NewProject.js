@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./NewProject1.css";
+import "./NewProject.css";
 import moment from "moment";
 
 import "antd/dist/antd.css";
@@ -23,7 +23,7 @@ const FormItem = Form.Item;
 const dateFormat = "YYYY/MM/DD";
 const currentDate = new Date().toISOString().substring(0, 10);
 
-class NewProject1 extends Component {
+class NewProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -1114,4 +1114,4 @@ class NewProject1 extends Component {
   }
 }
 
-export default NewProject1;
+export default NewProject;
