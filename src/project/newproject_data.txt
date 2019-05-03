@@ -1,0 +1,65 @@
+ /*
+           
+            interior_designer: {
+                first_name:         { value: '' },
+                last_name:          { value: '' },
+                address:            { value: '' },
+                phone:              { value: '' },
+                email:              { value: '' },
+                company_name:       { value: '' },
+                city:               { value: '' },
+                state:              { value: '' },
+                zip:                { value: '' },
+                website:            { value: '' }
+            },
+            general_contractor: {
+                first_name:         { value: '' },
+                last_name:          { value: '' },
+                address:            { value: '' },
+                phone:              { value: '' },
+                email:              { value: '' },
+                company_name:       { value: '' },
+                city:               { value: '' },
+                state:              { value: '' },
+                zip:                { value: '' },
+                website:            { value: '' }
+            },
+            tile_contractor: {
+                first_name:         {value: '' },
+                last_name:          { value: '' },
+                address:            { value: '' },
+                phone:              { value: '' },
+                email:              { value: '' },
+                company_name:       { value: '' },
+                city:               { value: '' },
+                state:              { value: '' },
+                zip:                { value: '' },
+                website:            { value: '' }
+            },
+            product_specs: [
+                {
+                    product: { value: '' },
+                    quantity: { value: '' },
+                    uofm: { value: '' },
+                    sample_submt_date: { value: '' },
+                    toronto_inventory_percentage: { value: '' },
+                    direct_import_percentage: { value: '' }
+                }
+            ]
+        }
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

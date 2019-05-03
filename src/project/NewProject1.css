@@ -1,4 +1,19 @@
-.Row{
-    display: flexbox;
-    align-content: space-around;
+.Form{
+    align: middle;
+    justify: space-around;
+    type: flex;
+    
 }
+
+.Row{
+    type: flex;
+    align: middle;
+    justify: space-between;
+}
+
+.Col{
+    offset: 4;
+    order: 2;
+
+}
+
