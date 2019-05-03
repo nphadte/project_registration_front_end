@@ -1048,6 +1048,17 @@ class NewProject1 extends Component {
                 </FormItem>
               </Col>
 
+              <Col span={6}>
+                <FormItem label="Samples Submitted Date">
+                  <DatePicker
+                    size="large"
+                    defaultValue={moment("2019/04/20", dateFormat)}
+                    format={dateFormat}
+                  />
+                </FormItem>
+              </Col>
+            </Row>
+            <Row>
               <Col span={3}>
                 <FormItem
                   label="TorontoImport"
