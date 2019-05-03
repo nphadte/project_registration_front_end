@@ -587,14 +587,15 @@ class NewProject extends Component {
 
             <Row>
               <Col span={5}>
-                <FormItem label=" General Contractor First Name">
+                <FormItem label="First Name">
                   <Input
                     size="large"
                     name="g_first_name"
                     autoComplete="off"
-                    placeholder="General Contractor First Name"
+                    placeholder="First Name"
                     value={
                       this.state.project_details.general_contractor.g_first_name
+                        .value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -614,6 +615,7 @@ class NewProject extends Component {
                     placeholder="Last Name"
                     value={
                       this.state.project_details.general_contractor.g_last_name
+                        .value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
