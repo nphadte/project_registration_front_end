@@ -111,6 +111,7 @@ class NewProject1 extends Component {
               <Col span={6}>
                 <Form.Item label="Project Date">
                   <DatePicker
+                    size="large"
                     defaultValue={moment(currentDate, dateFormat)}
                     format={dateFormat}
                   />
@@ -138,7 +139,9 @@ class NewProject1 extends Component {
                 <FormItem
                   label="Address"
                   name="address"
-                  validateStatus={this.state.project_details.project_address}
+                  validateStatus={
+                    this.state.project_details.project_address
+                  }
                   help={this.state.project_details.project_address.errorMsg}
                 >
                   <Input
@@ -194,7 +197,9 @@ class NewProject1 extends Component {
                     name="zip"
                     autoComplete="off"
                     placeholder="Zip Code"
-                    value={this.state.project_details.project_zip_code.value}
+                    value={
+                      this.state.project_details.project_zip_code.value
+                    }
                   />
                 </FormItem>
               </Col>
@@ -202,6 +207,7 @@ class NewProject1 extends Component {
               <Col span={8}>
                 <FormItem label="Tile Install Date">
                   <DatePicker
+                    size="large"
                     defaultValue={moment("2019/04/20", dateFormat)}
                     format={dateFormat}
                   />
@@ -220,7 +226,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Architect first name"
                     value={
-                      this.state.project_details.architect.a_first_name.value
+                      this.state.project_details.architect.a_first_name
+                        .value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -256,7 +263,9 @@ class NewProject1 extends Component {
                     name="address"
                     autoComplete="off"
                     placeholder="Address"
-                    value={this.state.project_details.architect.a_address.value}
+                    value={
+                      this.state.project_details.architect.a_address.value
+                    }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
                 </FormItem>
@@ -273,7 +282,9 @@ class NewProject1 extends Component {
                     name="phone"
                     autoComplete="off"
                     placeholder="Phone"
-                    value={this.state.project_details.architect.a_phone.value}
+                    value={
+                      this.state.project_details.architect.a_phone.value
+                    }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
                 </FormItem>
@@ -289,7 +300,9 @@ class NewProject1 extends Component {
                     name="email"
                     autoComplete="off"
                     placeholder="Email"
-                    value={this.state.project_details.architect.a_email.value}
+                    value={
+                      this.state.project_details.architect.a_email.value
+                    }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
                 </FormItem>
@@ -311,7 +324,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Company Name"
                     value={
-                      this.state.project_details.architect.a_company_name.value
+                      this.state.project_details.architect.a_company_name
+                        .value
                     }
                   />
                 </Form.Item>
@@ -330,14 +344,18 @@ class NewProject1 extends Component {
                     name="City"
                     autoComplete="off"
                     placeholder="City"
-                    value={this.state.project_details.architect.a_city.value}
+                    value={
+                      this.state.project_details.architect.a_city.value
+                    }
                   />
                 </Form.Item>
               </Col>
               <Col span={4}>
                 <FormItem
                   label="State"
-                  validateStatus={this.state.project_details.project_address}
+                  validateStatus={
+                    this.state.project_details.project_address
+                  }
                   help={this.state.project_details.project_address.errorMsg}
                 >
                   <Input
@@ -345,7 +363,9 @@ class NewProject1 extends Component {
                     name="state"
                     autoComplete="off"
                     placeholder="State"
-                    value={this.state.project_details.architect.a_state.value}
+                    value={
+                      this.state.project_details.architect.a_state.value
+                    }
                   />
                 </FormItem>
               </Col>
@@ -380,7 +400,9 @@ class NewProject1 extends Component {
                     //type="email"
                     autoComplete="off"
                     placeholder="website"
-                    value={this.state.project_details.architect.a_website.value}
+                    value={
+                      this.state.project_details.architect.a_website.value
+                    }
                   />
                 </FormItem>
               </Col>
@@ -397,8 +419,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Interior Designer first name"
                     value={
-                      this.state.project_details.interior_designer.i_first_name
-                        .value
+                      this.state.project_details.interior_designer
+                        .i_first_name.value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -417,8 +439,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Last Name"
                     value={
-                      this.state.project_details.interior_designer.i_last_name
-                        .value
+                      this.state.project_details.interior_designer
+                        .i_last_name.value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -456,7 +478,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Phone"
                     value={
-                      this.state.project_details.interior_designer.i_phone.value
+                      this.state.project_details.interior_designer.i_phone
+                        .value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -474,7 +497,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Email"
                     value={
-                      this.state.project_details.interior_designer.i_email.value
+                      this.state.project_details.interior_designer.i_email
+                        .value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -497,7 +521,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Company Name"
                     value={
-                      this.state.project_details.interior_designer.i_city.value
+                      this.state.project_details.interior_designer.i_city
+                        .value
                     }
                   />
                 </Form.Item>
@@ -517,7 +542,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="City"
                     value={
-                      this.state.project_details.interior_designer.i_city.value
+                      this.state.project_details.interior_designer.i_city
+                        .value
                     }
                   />
                 </Form.Item>
@@ -525,7 +551,9 @@ class NewProject1 extends Component {
               <Col span={4}>
                 <FormItem
                   label="State"
-                  validateStatus={this.state.project_details.project_address}
+                  validateStatus={
+                    this.state.project_details.project_address
+                  }
                   help={this.state.project_details.project_address.errorMsg}
                 >
                   <Input
@@ -534,7 +562,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="State"
                     value={
-                      this.state.project_details.interior_designer.i_state.value
+                      this.state.project_details.interior_designer.i_state
+                        .value
                     }
                   />
                 </FormItem>
@@ -553,7 +582,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="State"
                     value={
-                      this.state.project_details.interior_designer.i_zip.value
+                      this.state.project_details.interior_designer.i_zip
+                        .value
                     }
                   />
                 </FormItem>
@@ -592,7 +622,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="General Contractor First Name"
                     value={
-                      this.state.project_details.general_contractor.g_first_name
+                      this.state.project_details.general_contractor
+                        .g_first_name
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -611,7 +642,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Last Name"
                     value={
-                      this.state.project_details.general_contractor.g_last_name
+                      this.state.project_details.general_contractor
+                        .g_last_name
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -629,8 +661,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Address"
                     value={
-                      this.state.project_details.general_contractor.g_address
-                        .value
+                      this.state.project_details.general_contractor
+                        .g_address.value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -691,7 +723,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Company Name"
                     value={
-                      this.state.project_details.general_contractor.g_city.value
+                      this.state.project_details.general_contractor.g_city
+                        .value
                     }
                   />
                 </Form.Item>
@@ -711,7 +744,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="City"
                     value={
-                      this.state.project_details.general_contractor.g_city.value
+                      this.state.project_details.general_contractor.g_city
+                        .value
                     }
                   />
                 </Form.Item>
@@ -719,7 +753,9 @@ class NewProject1 extends Component {
               <Col span={4}>
                 <FormItem
                   label="State"
-                  validateStatus={this.state.project_details.project_address}
+                  validateStatus={
+                    this.state.project_details.project_address
+                  }
                   help={this.state.project_details.project_address.errorMsg}
                 >
                   <Input
@@ -745,7 +781,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="State"
                     value={
-                      this.state.project_details.general_contractor.g_zip.value
+                      this.state.project_details.general_contractor.g_zip
+                        .value
                     }
                   />
                 </FormItem>
@@ -765,8 +802,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="website"
                     value={
-                      this.state.project_details.general_contractor.g_website
-                        .value
+                      this.state.project_details.general_contractor
+                        .g_website.value
                     }
                   />
                 </FormItem>
@@ -784,8 +821,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Tile Contractor First name"
                     value={
-                      this.state.project_details.tile_contractor.t_first_name
-                        .value
+                      this.state.project_details.tile_contractor
+                        .t_first_name.value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -823,7 +860,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Address"
                     value={
-                      this.state.project_details.tile_contractor.t_address.value
+                      this.state.project_details.tile_contractor.t_address
+                        .value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -842,7 +880,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Phone"
                     value={
-                      this.state.project_details.tile_contractor.t_phone.value
+                      this.state.project_details.tile_contractor.t_phone
+                        .value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -860,7 +899,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Email"
                     value={
-                      this.state.project_details.tile_contractor.t_email.value
+                      this.state.project_details.tile_contractor.t_email
+                        .value
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -883,7 +923,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="Company Name"
                     value={
-                      this.state.project_details.tile_contractor.t_city.value
+                      this.state.project_details.tile_contractor.t_city
+                        .value
                     }
                   />
                 </Form.Item>
@@ -903,7 +944,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="City"
                     value={
-                      this.state.project_details.tile_contractor.t_city.value
+                      this.state.project_details.tile_contractor.t_city
+                        .value
                     }
                   />
                 </Form.Item>
@@ -911,7 +953,9 @@ class NewProject1 extends Component {
               <Col span={4}>
                 <FormItem
                   label="State"
-                  validateStatus={this.state.project_details.project_address}
+                  validateStatus={
+                    this.state.project_details.project_address
+                  }
                   help={this.state.project_details.project_address.errorMsg}
                 >
                   <Input
@@ -920,7 +964,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="State"
                     value={
-                      this.state.project_details.tile_contractor.t_state.value
+                      this.state.project_details.tile_contractor.t_state
+                        .value
                     }
                   />
                 </FormItem>
@@ -954,7 +999,8 @@ class NewProject1 extends Component {
                     autoComplete="off"
                     placeholder="website"
                     value={
-                      this.state.project_details.tile_contractor.t_website.value
+                      this.state.project_details.tile_contractor.t_website
+                        .value
                     }
                   />
                 </FormItem>
