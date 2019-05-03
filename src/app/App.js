@@ -6,9 +6,6 @@ import { Route, withRouter, Switch } from "react-router-dom";
 import { getCurrentUser } from "../util/APIUtils";
 import { ACCESS_TOKEN } from "../constants";
 
-// reokace this with project
-//import PollList from '../poll/PollList';
-//import NewPoll from '../poll/NewPoll';
 import Carousel from "../project/Carousel";
 import NewProject1 from "../project/NewProject1";
 import Login from "../user/login/Login";
