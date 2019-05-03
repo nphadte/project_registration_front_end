@@ -970,7 +970,7 @@ class NewProject1 extends Component {
 
             <h2> Product Specifications</h2>
             <Row>
-              <Col span={6}>
+              <Col span={5}>
                 <FormItem
                   label="Item"
                   hasFeedback
@@ -978,7 +978,7 @@ class NewProject1 extends Component {
                   help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
-                    size="large"
+                    size="medium"
                     name="Item"
                     autoComplete="off"
                     placeholder="Item"
@@ -989,7 +989,7 @@ class NewProject1 extends Component {
                   />
                 </FormItem>
               </Col>
-              <Col span={6}>
+              <Col span={5}>
                 <FormItem
                   label="Description"
                   hasFeedback
@@ -997,7 +997,7 @@ class NewProject1 extends Component {
                   help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
-                    size="large"
+                    size="medium"
                     name="description"
                     autoComplete="off"
                     placeholder="description"
@@ -1009,7 +1009,7 @@ class NewProject1 extends Component {
                 </FormItem>
               </Col>
 
-              <Col span={3}>
+              <Col span={2}>
                 <FormItem
                   label="Quantity"
                   hasFeedback
@@ -1017,7 +1017,7 @@ class NewProject1 extends Component {
                   help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
-                    size="large"
+                    size="medium"
                     name="quantity"
                     autoComplete="off"
                     placeholder="quantity"
@@ -1029,7 +1029,7 @@ class NewProject1 extends Component {
                 </FormItem>
               </Col>
 
-              <Col span={3}>
+              <Col span={2}>
                 <FormItem
                   label="UnitOfM"
                   hasFeedback
@@ -1037,7 +1037,7 @@ class NewProject1 extends Component {
                   help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
-                    size="large"
+                    size="medium"
                     name="uofm"
                     autoComplete="off"
                     placeholder="unitofm"
@@ -1048,29 +1048,27 @@ class NewProject1 extends Component {
                 </FormItem>
               </Col>
 
-              <Col span={6}>
-                <FormItem label="Samples Submitted Date">
+              <Col span={3}>
+                <FormItem label="Submitted Date">
                   <DatePicker
-                    size="large"
+                    size="medium"
                     defaultValue={moment("2019/04/20", dateFormat)}
                     format={dateFormat}
                   />
                 </FormItem>
               </Col>
-            </Row>
-            <Row>
               <Col span={3}>
                 <FormItem
-                  label="TorontoImport"
+                  label="Toronto"
                   hasFeedback
                   //validateStatus={this.state.email.validateStatus}
                   help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
-                    size="large"
-                    name="torontoimport"
+                    size="medium"
+                    name="toronto"
                     autoComplete="off"
-                    placeholder="torontoimport"
+                    placeholder="toronto"
                     value={
                       this.state.project_details.product_specs[0]
                         .p_toronto_inventory_percentage.value
@@ -1080,16 +1078,16 @@ class NewProject1 extends Component {
               </Col>
               <Col span={3}>
                 <FormItem
-                  label="DirectImport"
+                  label="Direct"
                   hasFeedback
                   //validateStatus={this.state.email.validateStatus}
                   help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
-                    size="large"
+                    size="medium"
                     name="directimport"
                     autoComplete="off"
-                    placeholder="directimport"
+                    placeholder="direct"
                     value={
                       this.state.project_details.product_specs[0]
                         .p_direct_import_percentage.value
