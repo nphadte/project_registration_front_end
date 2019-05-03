@@ -41,7 +41,7 @@
                     product: { value: '' },
                     quantity: { value: '' },
                     uofm: { value: '' },
-                    sample_submt_date: { value: '' },
+                    sample_submit_date: { value: '' },
                     toronto_inventory_percentage: { value: '' },
                     direct_import_percentage: { value: '' }
                 }

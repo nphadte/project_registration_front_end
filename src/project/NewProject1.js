@@ -383,6 +383,529 @@ class NewProject1 extends Component {
               </Col>
             </Row>
 
+            <h2> Interior Designer</h2>
+
+            <Row>
+              <Col span={5}>
+                <FormItem label=" Interior Designer First Name">
+                  <Input
+                    size="large"
+                    name="interior_designer_first_name"
+                    autoComplete="off"
+                    placeholder="Interior Designer first name"
+                    value={
+                      this.state.project_details.interior_designer.first_name
+                    }
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={5}>
+                <FormItem
+                  label="Last Name"
+                  //validateStatus={this.state.name.validateStatus}
+                  //help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="lastname"
+                    autoComplete="off"
+                    placeholder="Last Name"
+                    value={
+                      this.state.project_details.interior_designer.last_name
+                    }
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+              <Col span={5}>
+                <FormItem
+                  label="Address"
+                  //validateStatus={this.state.name.validateStatus}
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="address"
+                    autoComplete="off"
+                    placeholder="Address"
+                    value={this.state.project_details.interior_designer.address}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={4}>
+                <FormItem
+                  label="Phone"
+                  //validateStatus={this.state.name.validateStatus}
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="phone"
+                    autoComplete="off"
+                    placeholder="Phone"
+                    value={this.state.project_details.interior_designer.phone}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={5}>
+                <FormItem
+                  label="Email"
+                  //validateStatus={this.state.name.validateStatus}
+                >
+                  <Input
+                    size="large"
+                    name="email"
+                    autoComplete="off"
+                    placeholder="Email"
+                    value={this.state.project_details.interior_designer.emaill}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col span={5}>
+                <Form.Item
+                  label="Company Name"
+                  validateStatus={
+                    this.state.project_details.project_name.validateStatus
+                  }
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="City"
+                    autoComplete="off"
+                    placeholder="Company Name"
+                    value={this.state.project_details.interior_designer.city}
+                  />
+                </Form.Item>
+              </Col>
+
+              <Col span={5}>
+                <Form.Item
+                  label="City"
+                  validateStatus={
+                    this.state.project_details.project_name.validateStatus
+                  }
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="City"
+                    autoComplete="off"
+                    placeholder="City"
+                    value={
+                      this.state.project_details.interior_designer.city.value
+                    }
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <FormItem
+                  label="State"
+                  validateStatus={this.state.project_details.project_address}
+                  help={this.state.project_details.project_address.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="state"
+                    autoComplete="off"
+                    placeholder="State"
+                    value={this.state.project_details.architect.state}
+                  />
+                </FormItem>
+              </Col>
+              <Col span={5}>
+                <FormItem
+                  label="Zip Code"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="zip code"
+                    //type="email"
+                    autoComplete="off"
+                    placeholder="State"
+                    value={this.state.project_details.architect.zip}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={5}>
+                <FormItem
+                  label="Web Site"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="website"
+                    //type="email"
+                    autoComplete="off"
+                    placeholder="website"
+                    value={this.state.project_details.architect.website}
+                  />
+                </FormItem>
+              </Col>
+            </Row>
+
+            <h2> General Contractor</h2>
+
+            <Row>
+              <Col span={5}>
+                <FormItem label=" Architect First Name">
+                  <Input
+                    size="large"
+                    name="architect_first_name"
+                    autoComplete="off"
+                    placeholder="Architect first name"
+                    value={this.state.project_details.architect.first_name}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={5}>
+                <FormItem
+                  label="Last Name"
+                  //validateStatus={this.state.name.validateStatus}
+                  //help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="lastname"
+                    autoComplete="off"
+                    placeholder="Last Name"
+                    value={this.state.project_details.architect.last_name}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+              <Col span={5}>
+                <FormItem
+                  label="Address"
+                  //validateStatus={this.state.name.validateStatus}
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="address"
+                    autoComplete="off"
+                    placeholder="Address"
+                    value={this.state.project_details.architect.address}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={4}>
+                <FormItem
+                  label="Phone"
+                  //validateStatus={this.state.name.validateStatus}
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="phone"
+                    autoComplete="off"
+                    placeholder="Phone"
+                    value={this.state.project_details.architect.phone}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={5}>
+                <FormItem
+                  label="Email"
+                  //validateStatus={this.state.name.validateStatus}
+                >
+                  <Input
+                    size="large"
+                    name="email"
+                    autoComplete="off"
+                    placeholder="Email"
+                    value={this.state.project_details.architect.email}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col span={5}>
+                <Form.Item
+                  label="Company Name"
+                  validateStatus={
+                    this.state.project_details.project_name.validateStatus
+                  }
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="City"
+                    autoComplete="off"
+                    placeholder="Company Name"
+                    value={
+                      this.state.project_details.architect.company_name.value
+                    }
+                  />
+                </Form.Item>
+              </Col>
+
+              <Col span={5}>
+                <Form.Item
+                  label="City"
+                  validateStatus={
+                    this.state.project_details.project_name.validateStatus
+                  }
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="City"
+                    autoComplete="off"
+                    placeholder="City"
+                    value={this.state.project_details.architect.city.value}
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <FormItem
+                  label="State"
+                  validateStatus={this.state.project_details.project_address}
+                  help={this.state.project_details.project_address.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="state"
+                    autoComplete="off"
+                    placeholder="State"
+                    value={this.state.project_details.architect.state}
+                  />
+                </FormItem>
+              </Col>
+              <Col span={5}>
+                <FormItem
+                  label="Zip Code"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="zip code"
+                    //type="email"
+                    autoComplete="off"
+                    placeholder="State"
+                    value={this.state.project_details.architect.zip}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={5}>
+                <FormItem
+                  label="Web Site"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="website"
+                    //type="email"
+                    autoComplete="off"
+                    placeholder="website"
+                    value={this.state.project_details.architect.website}
+                  />
+                </FormItem>
+              </Col>
+            </Row>
+
+            <h2> Tile Contractor</h2>
+
+            <Row>
+              <Col span={5}>
+                <FormItem label=" Architect First Name">
+                  <Input
+                    size="large"
+                    name="architect_first_name"
+                    autoComplete="off"
+                    placeholder="Architect first name"
+                    value={this.state.project_details.architect.first_name}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={5}>
+                <FormItem
+                  label="Last Name"
+                  //validateStatus={this.state.name.validateStatus}
+                  //help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="lastname"
+                    autoComplete="off"
+                    placeholder="Last Name"
+                    value={this.state.project_details.architect.last_name}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+              <Col span={5}>
+                <FormItem
+                  label="Address"
+                  //validateStatus={this.state.name.validateStatus}
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="address"
+                    autoComplete="off"
+                    placeholder="Address"
+                    value={this.state.project_details.architect.address}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={4}>
+                <FormItem
+                  label="Phone"
+                  //validateStatus={this.state.name.validateStatus}
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="phone"
+                    autoComplete="off"
+                    placeholder="Phone"
+                    value={this.state.project_details.architect.phone}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={5}>
+                <FormItem
+                  label="Email"
+                  //validateStatus={this.state.name.validateStatus}
+                >
+                  <Input
+                    size="large"
+                    name="email"
+                    autoComplete="off"
+                    placeholder="Email"
+                    value={this.state.project_details.architect.email}
+                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                  />
+                </FormItem>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col span={5}>
+                <Form.Item
+                  label="Company Name"
+                  validateStatus={
+                    this.state.project_details.project_name.validateStatus
+                  }
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="City"
+                    autoComplete="off"
+                    placeholder="Company Name"
+                    value={
+                      this.state.project_details.architect.company_name.value
+                    }
+                  />
+                </Form.Item>
+              </Col>
+
+              <Col span={5}>
+                <Form.Item
+                  label="City"
+                  validateStatus={
+                    this.state.project_details.project_name.validateStatus
+                  }
+                  help={this.state.project_details.project_name.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="City"
+                    autoComplete="off"
+                    placeholder="City"
+                    value={this.state.project_details.architect.city.value}
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <FormItem
+                  label="State"
+                  validateStatus={this.state.project_details.project_address}
+                  help={this.state.project_details.project_address.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="state"
+                    autoComplete="off"
+                    placeholder="State"
+                    value={this.state.project_details.architect.state}
+                  />
+                </FormItem>
+              </Col>
+              <Col span={5}>
+                <FormItem
+                  label="Zip Code"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="zip code"
+                    //type="email"
+                    autoComplete="off"
+                    placeholder="State"
+                    value={this.state.project_details.architect.zip}
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={5}>
+                <FormItem
+                  label="Web Site"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Input
+                    size="large"
+                    name="website"
+                    //type="email"
+                    autoComplete="off"
+                    placeholder="website"
+                    value={this.state.project_details.architect.website}
+                  />
+                </FormItem>
+              </Col>
+            </Row>
+
             <FormItem>
               <Button
                 type="primary"
