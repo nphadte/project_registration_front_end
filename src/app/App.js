@@ -11,7 +11,6 @@ import { ACCESS_TOKEN } from "../constants";
 //import NewPoll from '../poll/NewPoll';
 import Carousel from "../project/Carousel";
 import NewProject1 from "../project/NewProject1";
-
 import Login from "../user/login/Login";
 import Signup from "../user/signup/Signup";
 import Profile from "../user/profile/Profile";
@@ -21,6 +20,7 @@ import LoadingIndicator from "../common/LoadingIndicator";
 import PrivateRoute from "../common/PrivateRoute";
 
 import { Layout, notification } from "antd";
+import ProjectList from "../project/ProjectList";
 const { Content } = Layout;
 
 class App extends Component {
@@ -144,6 +144,18 @@ class App extends Component {
                 handleLogout={this.handleLogout}
               />
               <Route component={NotFound} />
+              <Route
+                exact
+                path="/project/list"
+                render={props => (
+                  <ProjectList
+                    isAuthenticated={this.state.isAuthenticated}
+                    currentUser={this.state.currentUser}
+                    handleLogout={this.handleLogout}
+                    {...props}
+                  />
+                )}
+              />
             </Switch>
           </div>
         </Content>
