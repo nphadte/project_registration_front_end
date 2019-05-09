@@ -59,46 +59,6 @@ export function retreiveProjects(projectdata) {
   });
 }
 
-export function addArchitect(architectRequest) {
-  return request({
-    url: API_BASE_URL + "/architect",
-    method: "POST",
-    body: JSON.stringify(architectRequest)
-  });
-}
-
-export function addInteriorDesigner(interiordesignerRequest) {
-  return request({
-    url: API_BASE_URL + "/interiorDesigner",
-    method: "POST",
-    body: JSON.stringify(interiordesignerRequest)
-  });
-}
-
-export function addGeneralContractor(generalcontractorRequest) {
-  return request({
-    url: API_BASE_URL + "/generalcontractor",
-    method: "POST",
-    body: JSON.stringify(generalcontractorRequest)
-  });
-}
-
-export function addTileContractor(tilecontractorRequest) {
-  return request({
-    url: API_BASE_URL + "/tilecontractor",
-    method: "POST",
-    body: JSON.stringify(tilecontractorRequest)
-  });
-}
-
-export function addProductSpecs(productSpecsRequest) {
-  return request({
-    url: API_BASE_URL + "/productSpecs",
-    method: "POST",
-    body: JSON.stringify(productSpecsRequest)
-  });
-}
-
 export function castVote(voteData) {
   return request({
     url: API_BASE_URL + "/polls/" + voteData.pollId + "/votes",

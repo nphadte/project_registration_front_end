@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./NewProject.css";
 import moment from "moment";
 import { submitProject  } from "../util/APIUtils";
+import { ACCESS_TOKEN } from "../constants/index";
 
 import "antd/dist/antd.css";
 
@@ -98,21 +99,20 @@ class NewProject extends Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(" @@@@@@  Submitting the project form");
+    console.log(" Submitting the project form");
     const projectdetailsrequest = {
-      userId: "NNNNNNNN17882",
-      company: "NNNNNNNMy Company 2",
-      project_name: "NNNNN289 675 127fdfd8",
+      userId: "N17882",
+      company: "My Company 2",
+      project_name: "89 675 1278",
       project_date: "10/10/2019",
       address: "4500 Huntington",
       city: "Toronto",
       state: "ON",
-      zipcode: "L7H H4d",
+      zipcode:  "L7H H4d",
       project_completion_date: "10/5/2019",
       project_start_date: "15/5/2015",
       tile_install_date: "7/7/2017",
