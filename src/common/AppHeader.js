@@ -28,18 +28,10 @@ class AppHeader extends Component {
           </Link>
         </Menu.Item>,
         <Menu.Item key="/project/new">
-          <Link to="/project/new">
-            <img
-              src={pollIcon}
-              alt="create new project"
-              className="poll-icon"
-            />
-          </Link>
+          <Link to="/project/new">create project</Link>
         </Menu.Item>,
         <Menu.Item key="/project/list">
-          <Link to="/project/list">
-            <img src={pollIcon} alt="update projects" className="poll-icon" />
-          </Link>
+          <Link to="/project/list">Update</Link>
         </Menu.Item>,
         <Menu.Item key="/profile" className="profile-menu">
           <ProfileDropdownMenu

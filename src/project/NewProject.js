@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./NewProject.css";
 import moment from "moment";
+import { submitProject  } from "../util/APIUtils";
 
 import "antd/dist/antd.css";
 
@@ -95,7 +96,50 @@ class NewProject extends Component {
         ]
       }
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+
   }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(" @@@@@@  Submitting the project form");
+    const projectdetailsrequest = {
+      userId: "NNNNNNNN17882",
+      company: "NNNNNNNMy Company 2",
+      project_name: "NNNNN289 675 127fdfd8",
+      project_date: "10/10/2019",
+      address: "4500 Huntington",
+      city: "Toronto",
+      state: "ON",
+      zipcode: "L7H H4d",
+      project_completion_date: "10/5/2019",
+      project_start_date: "15/5/2015",
+      tile_install_date: "7/7/2017",
+     // architect: {
+      //  firstname: "NNNNNNJack",
+      //  lastname: "NNNNNJill",
+      //  address: "4589 Bramalea",
+      //  phone: "456 784 1256"
+     // }
+    };
+    submitProject(projectdetailsrequest)
+      .then(response => {
+        notification.success({
+          message: "Project Registration",
+          description: "Thank you! your Project has been submitted "
+        });
+      })
+      .catch(error => {
+        notification.error({
+          message: "Project Registration",
+          description:
+            error.message ||
+            "Sorry! Something went wrong. Please try again!"
+        });
+      });
+  }
+
 
   render() {
     return (
@@ -1104,7 +1148,7 @@ class NewProject extends Component {
                 type="primary"
                 htmlType="submit"
                 size="large"
-                className="signup-form-button"
+                className="project-submit-form-button"
               >
                 Submit your Project
               </Button>
