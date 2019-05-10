@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 import "./NewProject.css";
 import moment from "moment";
-import { submitProject  } from "../util/APIUtils";
+import { submitProject } from "../util/APIUtils";
 import { ACCESS_TOKEN } from "../constants/index";
-
 import "antd/dist/antd.css";
-
 import { Link } from "react-router-dom";
+import {
+  NAME_MIN_LENGTH,
+  NAME_MAX_LENGTH,
+  USERNAME_MIN_LENGTH,
+  USERNAME_MAX_LENGTH,
+  EMAIL_MAX_LENGTH,
+  PASSWORD_MIN_LENGTH,
+  PASSWORD_MAX_LENGTH
+} from "../constants/index";
 
 import {
   Form,
@@ -97,32 +104,175 @@ class NewProject extends Component {
         ]
       }
     };
-
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleInputChange(event, validationFun) {
+    const target = event.target;
+    const inputName = target.name;
+    const inputValue = target.value;
+
+    this.setState({
+      [inputValue]: {
+        value: inputValue,
+        ...validationFun(inputValue)
+      }
+    });
+  }
+
+  validateName = name => {
+    if (name.length < NAME_MIN_LENGTH) {
+      return {
+        validateStatus: "error",
+        errorMsg: `Name is too short (Minimum ${NAME_MIN_LENGTH} characters needed.)`
+      };
+    } else if (name.length > NAME_MAX_LENGTH) {
+      return {
+        validationStatus: "error",
+        errorMsg: `Name is too long (Maximum ${NAME_MAX_LENGTH} characters allowed.)`
+      };
+    } else {
+      return {
+        validateStatus: "success",
+        errorMsg: null
+      };
+    }
+  };
+
+  validateEmail = email => {
+    if (!email) {
+      return {
+        validateStatus: "error",
+        errorMsg: "Email may not be empty"
+      };
+    }
+
+    const EMAIL_REGEX = RegExp("[^@ ]+@[^@ ]+\\.[^@ ]+");
+    if (!EMAIL_REGEX.test(email)) {
+      return {
+        validateStatus: "error",
+        errorMsg: "Email not valid"
+      };
+    }
+
+    if (email.length > EMAIL_MAX_LENGTH) {
+      return {
+        validateStatus: "error",
+        errorMsg: `Email is too long (Maximum ${EMAIL_MAX_LENGTH} characters allowed)`
+      };
+    }
+
+    return {
+      validateStatus: null,
+      errorMsg: null
+    };
+  };
+
   handleSubmit(event) {
     event.preventDefault();
-    console.log(" Submitting the project form");
+
     const projectdetailsrequest = {
-      userId: "N17882",
-      company: "My Company 2",
-      project_name: "89 675 1278",
-      project_date: "10/10/2019",
-      address: "4500 Huntington",
-      city: "Toronto",
-      state: "ON",
-      zipcode:  "L7H H4d",
-      project_completion_date: "10/5/2019",
-      project_start_date: "15/5/2015",
-      tile_install_date: "7/7/2017",
-     // architect: {
-      //  firstname: "NNNNNNJack",
-      //  lastname: "NNNNNJill",
-      //  address: "4589 Bramalea",
-      //  phone: "456 784 1256"
-     // }
+      userId: "",
+      company: "",
+      project_name: this.state.project_details.project_name.value,
+      project_date: this.state.project_details.project_date.value,
+      address: this.state.project_details.project_address.value,
+      city: this.state.project_details.project_city.value,
+      state: this.state.project_details.project_state.value,
+      zip_code: this.state.project_details.project_zip_code.value,
+      tile_install_date: this.state.project_details.project_tile_install_date
+        .value,
+      architect: {
+        firstname: this.state.project_details.architect.a_first_name.value,
+        lastname: this.state.project_details.architect.a_last_name,
+        address: this.state.project_details.architect.a_address.value,
+        phone: this.state.project_details.architect.a_phone.value,
+        email: this.state.project_details.architect.a_email.value,
+        company: this.state.project_details.architect.a_company_name.value,
+        city: this.state.project_details.architect.a_city.value,
+        state: this.state.project_details.architect.a_state.value,
+        zip: this.state.project_details.architect.a_zip.value,
+        website: this.state.project_details.architect.a_website.value
+      }
     };
+
+    /*
+    const projectdetailsrequest = {
+      userId: "",
+      company: "",
+      project_name: this.state.project_details.project_name.value,
+      project_date: this.state.project_details.project_date.value,
+      address: this.state.project_details.project_address.value,
+      city: this.state.project_details.project_city.value,
+      state: this.state.project_details.project_state.value,
+      zipcode: this.state.project_details.project_zip_code,
+      project_completion_date: this.state.project_details.project_date,
+      tile_install_date: this.state.project_details.project_tile_install_date,
+      architect: {
+        firstname: this.state.project_details.architect.a_first_name.value,
+        lastname: this.state.project_details.architect.a_last_name,
+        address: this.state.project_details.architect.a_address,
+        phone: this.state.project_details.architect.a_phone,
+        email: this.state.project_details.architect.a_email.value,
+        company: this.state.project_details.architect.a_company_name.value,
+        city: this.state.project_details.architect.a_city.value,
+        state: this.state.project_details.architect.a_state.value,
+        zip: this.state.project_details.architect.a_zip.value,
+        website: this.state.project_details.architect.a_website.value
+      },
+      interior_designer: {
+        firstname: this.state.project_details.architect.a_first_name.value,
+        lastname: this.state.project_details.architect.a_last_name,
+        address: this.state.project_details.architect.a_address,
+        phone: this.state.project_details.architect.a_phone,
+        email: this.state.project_details.architect.a_email.value,
+        company: this.state.project_details.architect.a_company_name.value,
+        city: this.state.project_details.architect.a_city.value,
+        state: this.state.project_details.architect.a_state.value,
+        zip: this.state.project_details.architect.a_zip.value,
+        website: this.state.project_details.architect.a_website.value
+      },
+      general_contractor: {
+        firstname: this.state.project_details.general_contractor.g_first_name
+          .value,
+        lastname: this.state.project_details.general_contractor.g_last_name
+          .value,
+        address: this.state.project_details.general_contractor.g_address.value,
+        phone: this.state.project_details.general_contractor.g_phone.value,
+        email: this.state.project_details.general_contractor.g_email.value,
+        company: this.state.project_details.general_contractor.g_company_name
+          .value,
+        city: this.state.project_details.general_contractor.g_city.value,
+        state: this.state.project_details.general_contractor.g_state.value,
+        zip: this.state.project_details.general_contractor.g_zip.value,
+        website: this.state.project_details.general_contractor.g_website.value
+      },
+      tile_contractor: {
+        firstname: this.state.project_details.tile_contractor.t_first_name
+          .value,
+        lastname: this.state.project_details.tile_contractor.t_last_name.value,
+        address: this.state.project_details.tile_contractor.t_address.value,
+        phone: this.state.project_details.tile_contractor.t_phone.value,
+        email: this.state.project_details.tile_contractor.t_email.value,
+        company: this.state.project_details.tile_contractor.t_company_name
+          .value,
+        city: this.state.project_details.tile_contractor.t_city.value,
+        state: this.state.project_details.tile_contractor.t_state.value,
+        zip: this.state.project_details.tile_contractor.t_zip.value,
+        website: this.state.project_details.tile_contractor.t_website.value
+      },
+      product_specs: [
+        {
+          p_product: this.state.project_details.product_specs[0].p_product
+            .value,
+          p_quantity: this.state.project_details.product_specs[0].p_quantity
+            .value,
+          p_uofm: this.state.project_details.product_specs[0].p_uofm.value
+        }
+      ]
+    };
+    */
     submitProject(projectdetailsrequest)
       .then(response => {
         notification.success({
@@ -134,12 +284,10 @@ class NewProject extends Component {
         notification.error({
           message: "Project Registration",
           description:
-            error.message ||
-            "Sorry! Something went wrong. Please try again!"
+            error.message || "Sorry! Something went wrong. Please try again!"
         });
       });
   }
-
 
   render() {
     return (
@@ -156,7 +304,7 @@ class NewProject extends Component {
                 <Form.Item label="Project Date">
                   <DatePicker
                     size="large"
-                    defaultValue={moment(currentDate, dateFormat)}
+                    value={moment(currentDate, dateFormat)}
                     format={dateFormat}
                   />
                 </Form.Item>
@@ -174,8 +322,11 @@ class NewProject extends Component {
                     size="large"
                     name="name"
                     autoComplete="off"
+                    type="text"
                     placeholder="Project Name"
-                    value={this.state.project_details.project_name.value}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                   />
                 </Form.Item>
               </Col>
@@ -183,7 +334,9 @@ class NewProject extends Component {
                 <FormItem
                   label="Address"
                   name="address"
-                  validateStatus={this.state.project_details.project_address}
+                  validateStatus={
+                    this.state.project_details.project_address.validateStatus
+                  }
                   help={this.state.project_details.project_address.errorMsg}
                 >
                   <Input
@@ -191,7 +344,9 @@ class NewProject extends Component {
                     name="address"
                     autoComplete="off"
                     placeholder="Address"
-                    value={this.state.project_details.project_address.value}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                   />
                 </FormItem>
               </Col>
@@ -199,7 +354,9 @@ class NewProject extends Component {
                 <FormItem
                   label="City"
                   hasFeedback
-                  //validateStatus={this.state.email.validateStatus}
+                  validateStatus={
+                    this.state.project_details.project_city.validationStatus
+                  }
                   help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
@@ -208,7 +365,9 @@ class NewProject extends Component {
                     //type="email"
                     autoComplete="off"
                     placeholder="City"
-                    value={this.state.project_details.project_city.value}
+                    validateStatus={
+                      this.state.project_details.project_name.validateStatus
+                    }
                   />
                 </FormItem>
               </Col>
@@ -219,15 +378,19 @@ class NewProject extends Component {
                 <FormItem
                   label="State"
                   hasFeedback
-                  //validateStatus={this.state.email.validateStatus}
-                  help={this.state.project_details.project_city.errorMsg}
+                  validateStatus={
+                    this.state.project_details.project_state.validationStatus
+                  }
+                  help={this.state.project_details.project_state.errorMsg}
                 >
                   <Input
                     size="large"
                     name="state"
                     autoComplete="off"
                     placeholder="State"
-                    value={this.state.project_details.project_state.value}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                   />
                 </FormItem>
               </Col>
@@ -239,7 +402,9 @@ class NewProject extends Component {
                     name="zip"
                     autoComplete="off"
                     placeholder="Zip Code"
-                    value={this.state.project_details.project_zip_code.value}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                   />
                 </FormItem>
               </Col>
@@ -265,29 +430,23 @@ class NewProject extends Component {
                     name="architect_first_name"
                     autoComplete="off"
                     placeholder="Architect first name"
-                    value={
-                      this.state.project_details.architect.a_first_name.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
-                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
                 </FormItem>
               </Col>
 
               <Col span={5}>
-                <FormItem
-                  label="Last Name"
-                  //validateStatus={this.state.name.validateStatus}
-                  //help={this.state.project_details.project_name.errorMsg}
-                >
+                <FormItem label=" Architect Last  Name">
                   <Input
                     size="large"
-                    name="lastname"
+                    name="architect_last_name"
                     autoComplete="off"
-                    placeholder="Last Name"
-                    value={
-                      this.state.project_details.architect.a_last_name.value
+                    placeholder="Architect last  name"
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
-                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
                 </FormItem>
               </Col>
@@ -302,7 +461,9 @@ class NewProject extends Component {
                     name="address"
                     autoComplete="off"
                     placeholder="Address"
-                    value={this.state.project_details.architect.a_address.value}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
                 </FormItem>
@@ -319,8 +480,9 @@ class NewProject extends Component {
                     name="phone"
                     autoComplete="off"
                     placeholder="Phone"
-                    value={this.state.project_details.architect.a_phone.value}
-                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                   />
                 </FormItem>
               </Col>
@@ -335,8 +497,9 @@ class NewProject extends Component {
                     name="email"
                     autoComplete="off"
                     placeholder="Email"
-                    value={this.state.project_details.architect.a_email.value}
-                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                   />
                 </FormItem>
               </Col>
@@ -356,8 +519,8 @@ class NewProject extends Component {
                     name="City"
                     autoComplete="off"
                     placeholder="Company Name"
-                    value={
-                      this.state.project_details.architect.a_company_name.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </Form.Item>
@@ -376,7 +539,9 @@ class NewProject extends Component {
                     name="City"
                     autoComplete="off"
                     placeholder="City"
-                    value={this.state.project_details.architect.a_city.value}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                   />
                 </Form.Item>
               </Col>
@@ -391,7 +556,9 @@ class NewProject extends Component {
                     name="state"
                     autoComplete="off"
                     placeholder="State"
-                    value={this.state.project_details.architect.a_state.value}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                   />
                 </FormItem>
               </Col>
@@ -408,7 +575,9 @@ class NewProject extends Component {
                     //type="email"
                     autoComplete="off"
                     placeholder="State"
-                    value={this.state.project_details.architect.a_zip.value}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                   />
                 </FormItem>
               </Col>
@@ -426,14 +595,14 @@ class NewProject extends Component {
                     //type="email"
                     autoComplete="off"
                     placeholder="website"
-                    value={this.state.project_details.architect.a_website.value}
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
                   />
                 </FormItem>
               </Col>
             </Row>
-
             <h2> Interior Designer</h2>
-
             <Row>
               <Col span={5}>
                 <FormItem label=" Interior Designer First Name">
@@ -442,11 +611,9 @@ class NewProject extends Component {
                     name="interior_designer_first_name"
                     autoComplete="off"
                     placeholder="Interior Designer first name"
-                    value={
-                      this.state.project_details.interior_designer.i_first_name
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
-                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
                 </FormItem>
               </Col>
@@ -462,9 +629,8 @@ class NewProject extends Component {
                     name="lastname"
                     autoComplete="off"
                     placeholder="Last Name"
-                    value={
-                      this.state.project_details.interior_designer.i_last_name
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -481,9 +647,8 @@ class NewProject extends Component {
                     name="address"
                     autoComplete="off"
                     placeholder="Address"
-                    value={
-                      this.state.project_details.interior_designer.i_address
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -501,8 +666,8 @@ class NewProject extends Component {
                     name="phone"
                     autoComplete="off"
                     placeholder="Phone"
-                    value={
-                      this.state.project_details.interior_designer.i_phone.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -519,8 +684,8 @@ class NewProject extends Component {
                     name="email"
                     autoComplete="off"
                     placeholder="Email"
-                    value={
-                      this.state.project_details.interior_designer.i_email.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -542,8 +707,8 @@ class NewProject extends Component {
                     name="City"
                     autoComplete="off"
                     placeholder="Company Name"
-                    value={
-                      this.state.project_details.interior_designer.i_city.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </Form.Item>
@@ -562,8 +727,8 @@ class NewProject extends Component {
                     name="City"
                     autoComplete="off"
                     placeholder="City"
-                    value={
-                      this.state.project_details.interior_designer.i_city.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </Form.Item>
@@ -579,8 +744,8 @@ class NewProject extends Component {
                     name="state"
                     autoComplete="off"
                     placeholder="State"
-                    value={
-                      this.state.project_details.interior_designer.i_state.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -598,8 +763,8 @@ class NewProject extends Component {
                     //type="email"
                     autoComplete="off"
                     placeholder="State"
-                    value={
-                      this.state.project_details.interior_designer.i_zip.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -618,9 +783,8 @@ class NewProject extends Component {
                     //type="email"
                     autoComplete="off"
                     placeholder="website"
-                    value={
-                      this.state.project_details.interior_designer.i_website
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -637,9 +801,8 @@ class NewProject extends Component {
                     name="g_first_name"
                     autoComplete="off"
                     placeholder="First Name"
-                    value={
-                      this.state.project_details.general_contractor.g_first_name
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -657,9 +820,8 @@ class NewProject extends Component {
                     name="lastname"
                     autoComplete="off"
                     placeholder="Last Name"
-                    value={
-                      this.state.project_details.general_contractor.g_last_name
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -676,9 +838,8 @@ class NewProject extends Component {
                     name="address"
                     autoComplete="off"
                     placeholder="Address"
-                    value={
-                      this.state.project_details.general_contractor.g_address
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -696,9 +857,8 @@ class NewProject extends Component {
                     name="phone"
                     autoComplete="off"
                     placeholder="Phone"
-                    value={
-                      this.state.project_details.general_contractor.g_phone
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -715,9 +875,8 @@ class NewProject extends Component {
                     name="email"
                     autoComplete="off"
                     placeholder="Email"
-                    value={
-                      this.state.project_details.general_contractor.g_email
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -739,9 +898,8 @@ class NewProject extends Component {
                     name="Item"
                     autoComplete="off"
                     placeholder="Item"
-                    value={
-                      this.state.project_details.product_specs[0].p_product
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </Form.Item>
@@ -760,9 +918,8 @@ class NewProject extends Component {
                     name="quantity"
                     autoComplete="off"
                     placeholder="Quantity"
-                    value={
-                      this.state.project_details.product_specs[0].p_quantity
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </Form.Item>
@@ -778,8 +935,8 @@ class NewProject extends Component {
                     name="unitofmeasure"
                     autoComplete="off"
                     placeholder="State"
-                    value={
-                      this.state.project_details.product_specs[0].p_uofm.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -797,8 +954,8 @@ class NewProject extends Component {
                     //type="email"
                     autoComplete="off"
                     placeholder="State"
-                    value={
-                      this.state.project_details.general_contractor.g_zip.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -817,9 +974,8 @@ class NewProject extends Component {
                     //type="email"
                     autoComplete="off"
                     placeholder="website"
-                    value={
-                      this.state.project_details.general_contractor.g_website
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -836,9 +992,8 @@ class NewProject extends Component {
                     name="tile_contractor_first_name"
                     autoComplete="off"
                     placeholder="Tile Contractor First name"
-                    value={
-                      this.state.project_details.tile_contractor.t_first_name
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -856,9 +1011,8 @@ class NewProject extends Component {
                     name="lastname"
                     autoComplete="off"
                     placeholder="Last Name"
-                    value={
-                      this.state.project_details.tile_contractor.t_last_name
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -875,8 +1029,8 @@ class NewProject extends Component {
                     name="address"
                     autoComplete="off"
                     placeholder="Address"
-                    value={
-                      this.state.project_details.tile_contractor.t_address.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -894,8 +1048,8 @@ class NewProject extends Component {
                     name="phone"
                     autoComplete="off"
                     placeholder="Phone"
-                    value={
-                      this.state.project_details.tile_contractor.t_phone.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -912,8 +1066,8 @@ class NewProject extends Component {
                     name="email"
                     autoComplete="off"
                     placeholder="Email"
-                    value={
-                      this.state.project_details.tile_contractor.t_email.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                     //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
@@ -935,8 +1089,8 @@ class NewProject extends Component {
                     name="City"
                     autoComplete="off"
                     placeholder="Company Name"
-                    value={
-                      this.state.project_details.tile_contractor.t_city.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </Form.Item>
@@ -955,8 +1109,8 @@ class NewProject extends Component {
                     name="City"
                     autoComplete="off"
                     placeholder="City"
-                    value={
-                      this.state.project_details.tile_contractor.t_city.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </Form.Item>
@@ -972,8 +1126,8 @@ class NewProject extends Component {
                     name="state"
                     autoComplete="off"
                     placeholder="State"
-                    value={
-                      this.state.project_details.tile_contractor.t_state.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -991,8 +1145,8 @@ class NewProject extends Component {
                     //type="email"
                     autoComplete="off"
                     placeholder="State"
-                    value={
-                      this.state.project_details.tile_contractor.t_zip.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -1006,8 +1160,8 @@ class NewProject extends Component {
                     //type="email"
                     autoComplete="off"
                     placeholder="website"
-                    value={
-                      this.state.project_details.tile_contractor.t_website.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -1028,9 +1182,8 @@ class NewProject extends Component {
                     name="Item"
                     autoComplete="off"
                     placeholder="Item"
-                    value={
-                      this.state.project_details.product_specs[0].p_product
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -1047,9 +1200,8 @@ class NewProject extends Component {
                     name="description"
                     autoComplete="off"
                     placeholder="description"
-                    value={
-                      this.state.project_details.product_specs[0].p_quantity
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -1067,9 +1219,8 @@ class NewProject extends Component {
                     name="quantity"
                     autoComplete="off"
                     placeholder="quantity"
-                    value={
-                      this.state.project_details.product_specs[0].p_quantity
-                        .value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -1087,8 +1238,8 @@ class NewProject extends Component {
                     name="uofm"
                     autoComplete="off"
                     placeholder="unitofm"
-                    value={
-                      this.state.project_details.product_specs[0].p_uofm.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -1115,9 +1266,8 @@ class NewProject extends Component {
                     name="toronto"
                     autoComplete="off"
                     placeholder="toronto"
-                    value={
-                      this.state.project_details.product_specs[0]
-                        .p_toronto_inventory_percentage.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -1134,9 +1284,8 @@ class NewProject extends Component {
                     name="directimport"
                     autoComplete="off"
                     placeholder="direct"
-                    value={
-                      this.state.project_details.product_specs[0]
-                        .p_direct_import_percentage.value
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
                     }
                   />
                 </FormItem>
