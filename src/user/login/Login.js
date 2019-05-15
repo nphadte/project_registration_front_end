@@ -33,7 +33,11 @@ class LoginForm extends Component {
             if (!err) {
                 const loginRequest = Object.assign({}, values);
                 login(loginRequest)
-                .then(response => {
+                    .then(response => {
+                        console.log(
+                          "This is a Success and accessToken is:" +
+                            response.accessToken
+                        );
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     this.props.onLogin();
                 }).catch(error => {

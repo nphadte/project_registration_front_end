@@ -44,7 +44,7 @@ export function createPoll(pollData) {
 }
 
 export function submitProject(projectdata) {
-  console.log("The data sent out is :" + projectdata)
+  console.log("The data sent out is :" + JSON.stringify(projectdata));
   return request({
     url: API_BASE_URL + "/projects/createProject",
     method: "POST",

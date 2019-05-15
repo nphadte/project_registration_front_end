@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "../assets/anatoliaLogoWhite.png";
 import { Link, withRouter } from "react-router-dom";
+
 import "./AppHeader.css";
 import pollIcon from "../poll.svg";
 import { Layout, Menu, Dropdown, Icon } from "antd";
@@ -20,7 +21,7 @@ class AppHeader extends Component {
 
   render() {
     let menuItems;
-    if (this.props.currentUser) {
+     if (this.props.currentUser) {
       menuItems = [
         <Menu.Item key="/">
           <Link to="/">
