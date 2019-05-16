@@ -5,6 +5,7 @@ import { submitProject } from "../util/APIUtils";
 import { ACCESS_TOKEN } from "../constants/index";
 import "antd/dist/antd.css";
 import { Link } from "react-router-dom";
+
 import {
   NAME_MIN_LENGTH,
   NAME_MAX_LENGTH,
@@ -38,7 +39,7 @@ class NewProject extends Component {
     this.state = {
       userId: { value: "" },
       company: { value: "" },
-      project_date: { value: "" },
+      project_date: { value: moment(currentDate, dateFormat) },
       project_name: { value: "" },
       project_address: { value: "" },
       project_city: { value: "Initial" },
@@ -98,51 +99,64 @@ class NewProject extends Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onDateChanged = this.onDateChanged.bind(this);
   }
+
+  onDateChanged = id => {
+    // for a date field, the value is passed into the change handler
+    var self = this;
+    let dtstr = "";
+    return function(mmst, ds) {
+      //console.log(" The id in function is :" + JSON.stringify(id));
+      console.log(" The id in function is :" + id);
+      dtstr = ds;
+      console.log(" The dateString  in function value is :" + ds + ":" + dtstr);
+
+      self.setState({
+        [id]: {
+          value: ds
+        }
+      });
+    };
+  };
+
+  onChange = (field, dateString) => {
+    console.log(
+      "date iin onChange is: " +
+        field +
+        ":         dateString is :" +
+        dateString
+    );
+  };
 
   handleInputChange(event, validationFun) {
     const target = event.target;
     const inputName = target.name;
     const inputValue = target.value;
-   console.log("Target is :" + target + ":" + inputName + ":" + inputValue);
+    console.log("Target is :" + target + ":" + inputName + ":" + inputValue);
     this.setState({
       [inputName]: {
         value: inputValue,
         ...validationFun(inputValue)
       }
     });
-    console.log(
-      "After handleInoutChange state project_name is:" +
-        this.state.project_name.value
-    );
-    console.log(
-      "After handleInoutChange state project_date is:" +
-        this.state.project_date.value
-    );
-    console.log(
-      "After handleInoutChange state project_address is:" +
-        this.state.project_address.value
-    );
-    console.log(
-      "After handleInoutChange state project_city is:" +
-        this.state.project_city.value
-    );
   }
 
   validateName = name => {
     if (name.length < NAME_MIN_LENGTH) {
       return {
-        validationStatus: "error",
+        validateStatus: "error",
         errorMsg: `Name is too short (Minimum ${NAME_MIN_LENGTH} characters needed.)`
       };
     } else if (name.length > NAME_MAX_LENGTH) {
       return {
-        validationStatus: "error",
+        validateStatus: "error",
         errorMsg: `Name is too long (Maximum ${NAME_MAX_LENGTH} characters allowed.)`
       };
     } else {
       return {
-        validationStatus: "success",
+        validateStatus: "success",
         errorMsg: null
       };
     }
@@ -151,7 +165,7 @@ class NewProject extends Component {
   validateEmail = email => {
     if (!email) {
       return {
-        validationStatus: "error",
+        validateStatus: "error",
         errorMsg: "Email may not be empty"
       };
     }
@@ -159,20 +173,20 @@ class NewProject extends Component {
     const EMAIL_REGEX = RegExp("[^@ ]+@[^@ ]+\\.[^@ ]+");
     if (!EMAIL_REGEX.test(email)) {
       return {
-        validationStatus: "error",
+        validateStatus: "error",
         errorMsg: "Email not valid"
       };
     }
 
     if (email.length > EMAIL_MAX_LENGTH) {
       return {
-        validationStatus: "error",
+        validateStatus: "error",
         errorMsg: `Email is too long (Maximum ${EMAIL_MAX_LENGTH} characters allowed)`
       };
     }
 
     return {
-      validationStatus: null,
+      validateStatus: null,
       errorMsg: null
     };
   };
@@ -215,7 +229,7 @@ class NewProject extends Component {
         city: this.state.i_city.value,
         state: this.state.i_state.value,
         zip: this.state.i_zip.value,
-        website: this.state.i_website.value,
+        website: this.state.i_website.value
       },
       general_contractor: {
         firstname: this.state.g_first_name.value,
@@ -245,89 +259,14 @@ class NewProject extends Component {
         {
           p_product: this.state.product_specs[0].p_product.value,
           p_quantity: this.state.product_specs[0].p_quantity.value,
-          p_uofm: this.state.product_specs[0].p_uofm.value
+          p_uofm: this.state.product_specs[0].p_uofm.value,
+          p_sample_submt_date: this.state.product_specs[0].p_sample_submt_date.value,
+          p_toronto_inventory_percentage: this.state.product_specs[0].p_toronto_inventory_percentage.value,
+          p_direct_import_percentage: this.state.product_specs[0].p_direct_import_percentage.value
         }
       ]
     };
 
-    /*
-    const projectdetailsrequest = {
-      userId: "",
-      company: "",
-      project_name: this.state.project_details.project_name.value,
-      project_date: this.state.project_details.project_date.value,
-      address: this.state.project_details.project_address.value,
-      city: this.state.project_details.project_city.value,
-      state: this.state.project_details.project_state.value,
-      zipcode: this.state.project_details.project_zip_code,
-      project_completion_date: this.state.project_details.project_date,
-      tile_install_date: this.state.project_details.project_tile_install_date,
-      architect: {
-        firstname: this.state.project_details.architect.a_first_name.value,
-        lastname: this.state.project_details.architect.a_last_name,
-        address: this.state.project_details.architect.a_address,
-        phone: this.state.project_details.architect.a_phone,
-        email: this.state.project_details.architect.a_email.value,
-        company: this.state.project_details.architect.a_company_name.value,
-        city: this.state.project_details.architect.a_city.value,
-        state: this.state.project_details.architect.a_state.value,
-        zip: this.state.project_details.architect.a_zip.value,
-        website: this.state.project_details.architect.a_website.value
-      },
-      interior_designer: {
-        firstname: this.state.project_details.architect.a_first_name.value,
-        lastname: this.state.project_details.architect.a_last_name,
-        address: this.state.project_details.architect.a_address,
-        phone: this.state.project_details.architect.a_phone,
-        email: this.state.project_details.architect.a_email.value,
-        company: this.state.project_details.architect.a_company_name.value,
-        city: this.state.project_details.architect.a_city.value,
-        state: this.state.project_details.architect.a_state.value,
-        zip: this.state.project_details.architect.a_zip.value,
-        website: this.state.project_details.architect.a_website.value
-      },
-      general_contractor: {
-        firstname: this.state.project_details.general_contractor.g_first_name
-          .value,
-        lastname: this.state.project_details.general_contractor.g_last_name
-          .value,
-        address: this.state.project_details.general_contractor.g_address.value,
-        phone: this.state.project_details.general_contractor.g_phone.value,
-        email: this.state.project_details.general_contractor.g_email.value,
-        company: this.state.project_details.general_contractor.g_company_name
-          .value,
-        city: this.state.project_details.general_contractor.g_city.value,
-        state: this.state.project_details.general_contractor.g_state.value,
-        zip: this.state.project_details.general_contractor.g_zip.value,
-        website: this.state.project_details.general_contractor.g_website.value
-      },
-      tile_contractor: {
-        firstname: this.state.project_details.tile_contractor.t_first_name
-          .value,
-        lastname: this.state.project_details.tile_contractor.t_last_name.value,
-        address: this.state.project_details.tile_contractor.t_address.value,
-        phone: this.state.project_details.tile_contractor.t_phone.value,
-        email: this.state.project_details.tile_contractor.t_email.value,
-        company: this.state.project_details.tile_contractor.t_company_name
-          .value,
-        city: this.state.project_details.tile_contractor.t_city.value,
-        state: this.state.project_details.tile_contractor.t_state.value,
-        zip: this.state.project_details.tile_contractor.t_zip.value,
-        website: this.state.project_details.tile_contractor.t_website.value
-      },
-      product_specs: [
-        {
-          p_product: this.state.project_details.product_specs[0].p_product
-            .value,
-          p_quantity: this.state.project_details.product_specs[0].p_quantity
-            .value,
-          p_uofm: this.state.project_details.product_specs[0].p_uofm.value
-        }
-      ]
-    };
-    */
-
-    console.log("projectdetailsrequest project_name is :" + projectdetailsrequest.project_name);
     submitProject(projectdetailsrequest)
       .then(response => {
         notification.success({
@@ -362,9 +301,7 @@ class NewProject extends Component {
                     name="project_date"
                     value={moment(currentDate, dateFormat)}
                     format={dateFormat}
-                    onChange={event =>
-                      this.handleInputChange(event, this.validateName)
-                    }
+                    disabled="true"
                   />
                 </Form.Item>
               </Col>
@@ -372,9 +309,7 @@ class NewProject extends Component {
               <Col span={6}>
                 <Form.Item
                   label="Project Name"
-                  validationStatus={
-                    this.state.project_name.validationStatus
-                  }
+                  validateStatus={this.state.project_name.validateStatus}
                   help={this.state.project_name.errorMsg}
                 >
                   <Input
@@ -393,9 +328,7 @@ class NewProject extends Component {
                 <FormItem
                   label="Address"
                   name="project_address"
-                  validationStatus={
-                    this.state.project_address.validationStatus
-                  }
+                  validateStatus={this.state.project_address.validateStatus}
                   help={this.state.project_address.errorMsg}
                 >
                   <Input
@@ -413,7 +346,7 @@ class NewProject extends Component {
                 <FormItem
                   label="City"
                   hasFeedback
-                  //validationStatus={this.state.project_city.validationStatus}
+                  //validateStatus={this.state.project_city.validateStatus}
                   help={this.state.project_city.errorMsg}
                 >
                   <Input
@@ -421,9 +354,7 @@ class NewProject extends Component {
                     name="project_city"
                     autoComplete="off"
                     placeholder="City"
-                    validationStatus={
-                      this.state.project_city.validationStatus
-                    }
+                    validateStatus={this.state.project_city.validateStatus}
                     onChange={event =>
                       this.handleInputChange(event, this.validateName)
                     }
@@ -469,12 +400,12 @@ class NewProject extends Component {
                 <FormItem label="Tile Install Date">
                   <DatePicker
                     size="large"
-                    name="project_tile_install_date"
-                    defaultValue={moment("2019/04/20", dateFormat)}
+                    name=" project_tile_install_date"
+                    //defaultValue={moment("2019/04/20", dateFormat)}
                     format={dateFormat}
-                    //onChange={event =>
-                    //this.handleInputChange(event, this.validateName)
-                    //}
+                    onChange={this.onDateChanged(
+                      "project_tile_install_date"
+                    )}
                   />
                 </FormItem>
               </Col>
@@ -513,7 +444,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Address"
-                  validationStatus={this.state.a_address.validationStatus}
+                  validateStatus={this.state.a_address.validateStatus}
                   help={this.state.a_address.errorMsg}
                 >
                   <Input
@@ -531,7 +462,7 @@ class NewProject extends Component {
               <Col span={4}>
                 <FormItem
                   label="Phone"
-                  validationStatus={this.state.a_phone.validationStatus}
+                  validateStatus={this.state.a_phone.validateStatus}
                   help={this.state.a_phone.errorMsg}
                 >
                   <Input
@@ -549,7 +480,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Email"
-                  validationStatus={this.state.a_email.validationStatus}
+                  validateStatus={this.state.a_email.validateStatus}
                 >
                   <Input
                     size="large"
@@ -568,9 +499,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <Form.Item
                   label="Company Name"
-                  validationStatus={
-                    this.state.a_company_name.validationStatus
-                  }
+                  validateStatus={this.state.a_company_name.validateStatus}
                   help={this.state.a_company_name.errorMsg}
                 >
                   <Input
@@ -588,7 +517,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <Form.Item
                   label="City"
-                  validationStatus={this.state.a_city.validationStatus}
+                  validateStatus={this.state.a_city.validateStatus}
                   help={this.state.a_city.errorMsg}
                 >
                   <Input
@@ -605,7 +534,7 @@ class NewProject extends Component {
               <Col span={4}>
                 <FormItem
                   label="State"
-                  validationStatus={this.state.a_state.validationStatus}
+                  validateStatus={this.state.a_state.validateStatus}
                   help={this.state.a_state.errorMsg}
                 >
                   <Input
@@ -623,7 +552,7 @@ class NewProject extends Component {
                 <FormItem
                   label="Zip Code"
                   hasFeedback
-                  validationStatus={this.state.a_zip.validationStatus}
+                  validateStatus={this.state.a_zip.validateStatus}
                   help={this.state.a_zip.errorMsg}
                 >
                   <Input
@@ -642,12 +571,12 @@ class NewProject extends Component {
                 <FormItem
                   label="Web Site"
                   hasFeedback
-                  validationStatus={this.state.a_website.validationStatus}
+                  validateStatus={this.state.a_website.validateStatus}
                   help={this.state.a_website.errorMsg}
                 >
                   <Input
                     size="large"
-                    name="website"
+                    name="a_website"
                     autoComplete="off"
                     placeholder="website"
                     onChange={event =>
@@ -676,7 +605,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Last Name"
-                  validationStatus={this.state.i_last_name.validationStatus}
+                  validateStatus={this.state.i_last_name.validateStatus}
                   //help={this.state.project_details.project_name.errorMsg}
                 >
                   <Input
@@ -693,7 +622,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Address"
-                  validationStatus={this.state.i_address.validationStatus}
+                  validateStatus={this.state.i_address.validateStatus}
                   help={this.state.i_address.errorMsg}
                 >
                   <Input
@@ -711,7 +640,7 @@ class NewProject extends Component {
               <Col span={4}>
                 <FormItem
                   label="Phone"
-                  validationStatus={this.state.i_phone.validationStatus}
+                  validateStatus={this.state.i_phone.validateStatus}
                   help={this.state.i_phone.errorMsg}
                 >
                   <Input
@@ -729,7 +658,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Email"
-                  validationStatus={this.state.i_email.validationStatus}
+                  validateStatus={this.state.i_email.validateStatus}
                 >
                   <Input
                     size="large"
@@ -748,9 +677,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <Form.Item
                   label="Company Name"
-                  validationStatus={
-                    this.state.i_company_name.validationStatus
-                  }
+                  validateStatus={this.state.i_company_name.validateStatus}
                   help={this.state.i_company_name.errorMsg}
                 >
                   <Input
@@ -768,7 +695,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <Form.Item
                   label="City"
-                  validationStatus={this.state.i_city.validationStatus}
+                  validateStatus={this.state.i_city.validateStatus}
                   help={this.state.i_city.errorMsg}
                 >
                   <Input
@@ -785,7 +712,7 @@ class NewProject extends Component {
               <Col span={4}>
                 <FormItem
                   label="State"
-                  validationStatus={this.state.i_state.validationStatus}
+                  validateStatus={this.state.i_state.validateStatus}
                   help={this.state.i_state.errorMsg}
                 >
                   <Input
@@ -803,7 +730,7 @@ class NewProject extends Component {
                 <FormItem
                   label="Zip Code"
                   hasFeedback
-                  validationStatus={this.state.i_zip.validationStatus}
+                  validateStatus={this.state.i_zip.validateStatus}
                   help={this.state.i_zip.errorMsg}
                 >
                   <Input
@@ -822,7 +749,7 @@ class NewProject extends Component {
                 <FormItem
                   label="Web Site"
                   hasFeedback
-                  validationStatus={this.state.i_website.value}
+                  validateStatus={this.state.i_website.value}
                   help={this.state.i_website.errorMsg}
                 >
                   <Input
@@ -858,7 +785,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Last Name"
-                  validationStatus={this.state.g_last_name.validationStatus}
+                  validateStatus={this.state.g_last_name.validateStatus}
                   help={this.state.g_last_name.errorMsg}
                 >
                   <Input
@@ -876,7 +803,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Address"
-                  validationStatus={this.state.g_address.validationStatus}
+                  validateStatus={this.state.g_address.validateStatus}
                   help={this.state.g_address.errorMsg}
                 >
                   <Input
@@ -887,7 +814,6 @@ class NewProject extends Component {
                     onChange={event =>
                       this.handleInputChange(event, this.validateName)
                     }
-                    //onChange={(event) => this.handleInputChange(event, this.validateName)}
                   />
                 </FormItem>
               </Col>
@@ -895,7 +821,7 @@ class NewProject extends Component {
               <Col span={4}>
                 <FormItem
                   label="Phone"
-                  validationStatus={this.state.g_phone.validationStatus}
+                  validateStatus={this.state.g_phone.validateStatus}
                   help={this.state.g_phone.errorMsg}
                 >
                   <Input
@@ -914,7 +840,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Email"
-                  validationStatus={this.state.g_email.validationStatus}
+                  validateStatus={this.state.g_email.validateStatus}
                 >
                   <Input
                     size="large"
@@ -931,9 +857,7 @@ class NewProject extends Component {
             <Col span={5}>
               <Form.Item
                 label="Company Name"
-                validationStatus={
-                  this.state.i_company_name.validationStatus
-                }
+                validateStatus={this.state.i_company_name.validateStatus}
                 help={this.state.i_company_name.errorMsg}
               >
                 <Input
@@ -951,7 +875,7 @@ class NewProject extends Component {
             <Col span={5}>
               <Form.Item
                 label="City"
-                validationStatus={this.state.i_city.validationStatus}
+                validateStatus={this.state.i_city.validateStatus}
                 help={this.state.i_city.errorMsg}
               >
                 <Input
@@ -968,7 +892,7 @@ class NewProject extends Component {
             <Col span={4}>
               <FormItem
                 label="State"
-                validationStatus={this.state.i_state.validationStatus}
+                validateStatus={this.state.i_state.validateStatus}
                 help={this.state.i_state.errorMsg}
               >
                 <Input
@@ -986,7 +910,7 @@ class NewProject extends Component {
               <FormItem
                 label="Zip Code"
                 hasFeedback
-                validationStatus={this.state.i_zip.validationStatus}
+                validateStatus={this.state.i_zip.validateStatus}
                 help={this.state.i_zip.errorMsg}
               >
                 <Input
@@ -1005,7 +929,7 @@ class NewProject extends Component {
               <FormItem
                 label="Web Site"
                 hasFeedback
-                validationStatus={this.state.i_website.value}
+                validateStatus={this.state.i_website.value}
                 help={this.state.i_website.errorMsg}
               >
                 <Input
@@ -1028,7 +952,7 @@ class NewProject extends Component {
                 <FormItem label=" Tile Contractor  First Name">
                   <Input
                     size="large"
-                    name="tile_contractor_first_name"
+                    name="t_firstname"
                     autoComplete="off"
                     placeholder="Tile Contractor First name"
                     onChange={event =>
@@ -1042,7 +966,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Last Name"
-                  validationStatus={this.state.t_last_name.validationStatus}
+                  validateStatus={this.state.t_last_name.validateStatus}
                   help={this.state.t_last_name.errorMsg}
                 >
                   <Input
@@ -1060,7 +984,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Address"
-                  validationStatus={this.state.t_address.validationStatus}
+                  validateStatus={this.state.t_address.validateStatus}
                   help={this.state.t_address.errorMsg}
                 >
                   <Input
@@ -1079,7 +1003,7 @@ class NewProject extends Component {
               <Col span={4}>
                 <FormItem
                   label="Phone"
-                  validationStatus={this.state.t_phone.validationStatus}
+                  validateStatus={this.state.t_phone.validateStatus}
                   help={this.state.t_phone.errorMsg}
                 >
                   <Input
@@ -1098,7 +1022,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <FormItem
                   label="Email"
-                  //validationStatus={this.state.name.validationStatus}
+                  //validateStatus={this.state.name.validateStatus}
                 >
                   <Input
                     size="large"
@@ -1118,9 +1042,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <Form.Item
                   label="Company Name"
-                  validationStatus={
-                    this.state.t_company_name.validationStatus
-                  }
+                  validateStatus={this.state.t_company_name.validateStatus}
                   help={this.state.t_company_name.errorMsg}
                 >
                   <Input
@@ -1138,7 +1060,7 @@ class NewProject extends Component {
               <Col span={5}>
                 <Form.Item
                   label="City"
-                  validationStatus={this.state.t_city.validationStatus}
+                  validateStatus={this.state.t_city.validateStatus}
                   help={this.state.t_city.errorMsg}
                 >
                   <Input
@@ -1155,12 +1077,12 @@ class NewProject extends Component {
               <Col span={4}>
                 <FormItem
                   label="State"
-                  validationStatus={this.state.t_state.validationStatus}
+                  validateStatus={this.state.t_state.validateStatus}
                   help={this.state.t_state.errorMsg}
                 >
                   <Input
                     size="large"
-                    name="state"
+                    name="t_state"
                     autoComplete="off"
                     placeholder="State"
                     onChange={event =>
@@ -1173,7 +1095,7 @@ class NewProject extends Component {
                 <FormItem
                   label="Zip Code"
                   hasFeedback
-                  validationStatus={this.state.t_zip.validationStatus}
+                  validateStatus={this.state.t_zip.validateStatus}
                   help={this.state.t_zip.errorMsg}
                 >
                   <Input
@@ -1209,8 +1131,8 @@ class NewProject extends Component {
                 <FormItem
                   label="Item"
                   hasFeedback
-                  validationStatus={
-                    this.state.product_specs[0].p_product.validationStatus
+                  validateStatus={
+                    this.state.product_specs[0].p_product.validateStatus
                   }
                   help={this.state.product_specs[0].p_product.errorMsg}
                 >
@@ -1229,7 +1151,7 @@ class NewProject extends Component {
                 <FormItem
                   label="Description"
                   hasFeedback
-                  //validationStatus={this.state.email.validationStatus}
+                  //validateStatus={this.state.email.validateStatus}
                   //help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
@@ -1248,12 +1170,12 @@ class NewProject extends Component {
                 <FormItem
                   label="Quantity"
                   hasFeedback
-                  //validationStatus={this.state.email.validationStatus}
+                  //validateStatus={this.state.email.validateStatus}
                   //help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
                     size="default"
-                    name="quantity"
+                    name="p_quantity"
                     autoComplete="off"
                     placeholder="quantity"
                     onChange={event =>
@@ -1267,12 +1189,12 @@ class NewProject extends Component {
                 <FormItem
                   label="UnitOfM"
                   hasFeedback
-                  //validationStatus={this.state.email.validationStatus}
+                  //validateStatus={this.state.email.validateStatus}
                   //help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
                     size="default"
-                    name="uofm"
+                    name="p_uofm"
                     autoComplete="off"
                     placeholder="unitofm"
                     onChange={event =>
@@ -1288,6 +1210,7 @@ class NewProject extends Component {
                     size="default"
                     defaultValue={moment("2019/04/20", dateFormat)}
                     format={dateFormat}
+                    onChange={this.onDateChanged("p_sample_submt_date")}
                   />
                 </FormItem>
               </Col>
@@ -1295,12 +1218,12 @@ class NewProject extends Component {
                 <FormItem
                   label="Toronto"
                   hasFeedback
-                  //validationStatus={this.state.email.validationStatus}
+                  //validateStatus={this.state.email.validateStatus}
                   //help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
                     size="default"
-                    name="toronto"
+                    name="p_toronto_inventory_percentage"
                     autoComplete="off"
                     placeholder="toronto"
                     onChange={event =>
@@ -1313,12 +1236,12 @@ class NewProject extends Component {
                 <FormItem
                   label="Direct"
                   hasFeedback
-                  //validationStatus={this.state.email.validationStatus}
+                  //validateStatus={this.state.email.validateStatus}
                   //help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
                     size="default"
-                    name="directimport"
+                    name="p_direct_import_percentage"
                     autoComplete="off"
                     placeholder="direct"
                     onChange={event =>
