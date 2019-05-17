@@ -1123,7 +1123,7 @@ class NewProject extends Component {
             </Row>
             <h2> Product Specifications</h2>
             <Row>
-              <Col span={4}>
+              <Col span={13}>
                 <FormItem label="Product Description">
                   <Select
                     size="default"
@@ -1151,7 +1151,7 @@ class NewProject extends Component {
                   </Select>
                 </FormItem>
               </Col>
-              <Col span={3}>
+              <Col span={5}>
                 <FormItem
                   label="Item"
                   hasFeedback
@@ -1171,7 +1171,7 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-              <Col span={2}>
+              <Col span={5}>
                 <FormItem
                   label="Brand Name"
                   hasFeedback
@@ -1189,8 +1189,9 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
-              <Col span={2}>
+            </Row>
+            <Row>
+              <Col span={4}>
                 <FormItem
                   label="Quantity"
                   hasFeedback
@@ -1209,7 +1210,7 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
 
-              <Col span={2}>
+              <Col span={4}>
                 <FormItem
                   label="UnitOfM"
                   hasFeedback
@@ -1218,7 +1219,6 @@ class NewProject extends Component {
                 >
                   <Select
                     size="default"
-                    style={{ width: 200 }}
                     name="p_uofm"
                     placeholder="Unit Of Measure"
                   >
@@ -1231,7 +1231,7 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
 
-              <Col span={4}>
+              <Col span={5}>
                 <FormItem label="Submitted Date">
                   <DatePicker
                     size="default"
@@ -1241,7 +1241,7 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-              <Col span={2}>
+              <Col span={4}>
                 <FormItem
                   label="Toronto"
                   hasFeedback
@@ -1259,7 +1259,7 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-              <Col span={2}>
+              <Col span={4}>
                 <FormItem
                   label="Direct"
                   hasFeedback
