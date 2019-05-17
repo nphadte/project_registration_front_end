@@ -1231,7 +1231,7 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
 
-              <Col span={5}>
+              <Col span={6}>
                 <FormItem label="Submitted Date">
                   <DatePicker
                     size="default"
