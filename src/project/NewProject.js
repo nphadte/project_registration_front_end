@@ -26,12 +26,14 @@ import {
   DatePicker,
   Tooltip,
   Icon,
-  AutoComplete
+  AutoComplete,
+  Select
 } from "antd";
 
 const FormItem = Form.Item;
 const dateFormat = "YYYY/MM/DD";
 const currentDate = new Date().toISOString().substring(0, 10);
+const Option = Select.Option;
 
 class NewProject extends Component {
   constructor(props) {
@@ -101,7 +103,12 @@ class NewProject extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onDateChanged = this.onDateChanged.bind(this);
+    this.onSelectChanged = this.onSelectChanged.bind(this);
   }
+
+  onSelectChanged = (name, value1) => {
+    console.log("Input is :" + name + " and value is:" + value1);
+  };
 
   onDateChanged = id => {
     // for a date field, the value is passed into the change handler
@@ -260,9 +267,12 @@ class NewProject extends Component {
           p_product: this.state.product_specs[0].p_product.value,
           p_quantity: this.state.product_specs[0].p_quantity.value,
           p_uofm: this.state.product_specs[0].p_uofm.value,
-          p_sample_submt_date: this.state.product_specs[0].p_sample_submt_date.value,
-          p_toronto_inventory_percentage: this.state.product_specs[0].p_toronto_inventory_percentage.value,
-          p_direct_import_percentage: this.state.product_specs[0].p_direct_import_percentage.value
+          p_sample_submt_date: this.state.product_specs[0].p_sample_submt_date
+            .value,
+          p_toronto_inventory_percentage: this.state.product_specs[0]
+            .p_toronto_inventory_percentage.value,
+          p_direct_import_percentage: this.state.product_specs[0]
+            .p_direct_import_percentage.value
         }
       ]
     };
@@ -362,7 +372,6 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
             </Row>
-
             <Row>
               <Col span={8}>
                 <FormItem
@@ -403,16 +412,12 @@ class NewProject extends Component {
                     name=" project_tile_install_date"
                     //defaultValue={moment("2019/04/20", dateFormat)}
                     format={dateFormat}
-                    onChange={this.onDateChanged(
-                      "project_tile_install_date"
-                    )}
+                    onChange={this.onDateChanged("project_tile_install_date")}
                   />
                 </FormItem>
               </Col>
             </Row>
-
             <h2> Architect</h2>
-
             <Row>
               <Col span={5}>
                 <FormItem label=" Architect First Name">
@@ -494,7 +499,6 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
             </Row>
-
             <Row>
               <Col span={5}>
                 <Form.Item
@@ -672,7 +676,6 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
             </Row>
-
             <Row>
               <Col span={5}>
                 <Form.Item
@@ -764,7 +767,6 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
             </Row>
-
             <h2> General Contractor</h2>
             <Row>
               <Col span={5}>
@@ -871,7 +873,6 @@ class NewProject extends Component {
                 />
               </Form.Item>
             </Col>
-
             <Col span={5}>
               <Form.Item
                 label="City"
@@ -924,7 +925,6 @@ class NewProject extends Component {
                 />
               </FormItem>
             </Col>
-
             <Col span={5}>
               <FormItem
                 label="Web Site"
@@ -944,9 +944,7 @@ class NewProject extends Component {
               </FormItem>
             </Col>
             <Row />
-
             <h2> Tile Contractor</h2>
-
             <Row>
               <Col span={5}>
                 <FormItem label=" Tile Contractor  First Name">
@@ -1037,7 +1035,6 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
             </Row>
-
             <Row>
               <Col span={5}>
                 <Form.Item
@@ -1124,10 +1121,37 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
             </Row>
-
             <h2> Product Specifications</h2>
             <Row>
-              <Col span={5}>
+              <Col span={4}>
+                <FormItem label="Product Description">
+                  <Select
+                    size="default"
+                    name="product_desc"
+                    placeholder="product Description"
+                  >
+                    <Option value="69-346 12x24 Mayfair Statuario Venato HD Rectified Porcelain">
+                      Mayfair Statuario Venato HD Rectified Porcelain
+                    </Option>
+
+                    <Option value="69-954 12x24 Mayfair Strada Ash HD Rectified Porcelain">
+                      69-954 12x24 Mayfair Strada Ash HD Rectified Porcelain
+                    </Option>
+                    <Option value="69-346 12x24 Mayfair Statuario Venato HD Rectified Porcelain">
+                      69-346 12x24 Mayfair Statuario Venato HD Rectified
+                      Porcelain
+                    </Option>
+                    <Option value="69-894 12x24 Mayfair Volakas Grigio HD Polished Rect. Porcelain">
+                      69-894 12x24 Mayfair Volakas Grigio HD Polished Rect.
+                      Porcelain
+                    </Option>
+                    <Option value="69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain">
+                      69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain
+                    </Option>
+                  </Select>
+                </FormItem>
+              </Col>
+              <Col span={3}>
                 <FormItem
                   label="Item"
                   hasFeedback
@@ -1147,16 +1171,16 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-              <Col span={5}>
+              <Col span={2}>
                 <FormItem
-                  label="Description"
+                  label="Brand Name"
                   hasFeedback
                   //validateStatus={this.state.email.validateStatus}
                   //help={this.state.project_details.project_city.errorMsg}
                 >
                   <Input
                     size="default"
-                    name="description"
+                    name="brand_name"
                     autoComplete="off"
                     placeholder="description"
                     onChange={event =>
@@ -1179,7 +1203,7 @@ class NewProject extends Component {
                     autoComplete="off"
                     placeholder="quantity"
                     onChange={event =>
-                      this.handleInputChange(event, this.validateName)
+                      this.onSelectChanged(event, this.validateName)
                     }
                   />
                 </FormItem>
@@ -1192,15 +1216,18 @@ class NewProject extends Component {
                   //validateStatus={this.state.email.validateStatus}
                   //help={this.state.project_details.project_city.errorMsg}
                 >
-                  <Input
+                  <Select
                     size="default"
+                    style={{ width: 200 }}
                     name="p_uofm"
-                    autoComplete="off"
-                    placeholder="unitofm"
-                    onChange={event =>
-                      this.handleInputChange(event, this.validateName)
-                    }
-                  />
+                    placeholder="Unit Of Measure"
+                  >
+                    <Option value={"    boxes        "}>
+                      {"    boxes        "}
+                    </Option>
+                    <Option value="  sq ft      ">{" sq ft    "}</Option>
+                    <Option value="blocks"> {"    blocks        "}</Option>
+                  </Select>
                 </FormItem>
               </Col>
 
@@ -1210,11 +1237,11 @@ class NewProject extends Component {
                     size="default"
                     defaultValue={moment("2019/04/20", dateFormat)}
                     format={dateFormat}
-                    onChange={this.onDateChanged("p_sample_submt_date")}
+                    onChange={event => this.onSelectChanged(event)}
                   />
                 </FormItem>
               </Col>
-              <Col span={3}>
+              <Col span={2}>
                 <FormItem
                   label="Toronto"
                   hasFeedback
@@ -1232,7 +1259,7 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-              <Col span={3}>
+              <Col span={2}>
                 <FormItem
                   label="Direct"
                   hasFeedback

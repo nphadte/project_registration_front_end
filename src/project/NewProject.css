@@ -14,3 +14,17 @@
   offset: 4;
   order: 2;
 }
+
+.Select {
+  width: 50 px;
+  max-width: 50px;
+  min-width: 50px;
+  size: 50 px;
+}
+
+.Option {
+  width: 50 px;
+  max-width: 50px;
+  min-width: 50px;
+  size: 50 px;
+}
