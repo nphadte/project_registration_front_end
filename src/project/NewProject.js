@@ -130,10 +130,7 @@ class NewProject extends Component {
 
   onChange = (field, dateString) => {
     console.log(
-      "date iin onChange is: " +
-        field +
-        ":         dateString is :" +
-        dateString
+      "date in onChange is: " + field + ":         dateString is :" + dateString
     );
   };
 
@@ -141,7 +138,7 @@ class NewProject extends Component {
     const target = event.target;
     const inputName = target.name;
     const inputValue = target.value;
-    console.log("Target is :" + target + ":" + inputName + ":" + inputValue);
+   //console.log("Target is :" + target + ":" + inputName + ":" + inputValue);
     this.setState({
       [inputName]: {
         value: inputValue,
@@ -1278,6 +1275,9 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
             </Row>
+
+
+            
 
             <FormItem>
               <Button
