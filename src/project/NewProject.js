@@ -419,9 +419,7 @@ class NewProject extends Component {
                     name=" project_tile_install_date"
                     //defaultValue={moment("2019/04/20", dateFormat)}
                     format={dateFormat}
-                    onChange={this.onDateChanged(
-                      "project_tile_install_date"
-                    )}
+                    onChange={this.onDateChanged("project_tile_install_date")}
                   />
                 </FormItem>
               </Col>
@@ -1132,7 +1130,7 @@ class NewProject extends Component {
             </Row>
             <h2> Product Specifications</h2>
             <Row>
-              <Col span={10}>
+              <Col span={9}>
                 <FormItem label="Product Description">
                   <Select
                     size="default"
@@ -1158,14 +1156,176 @@ class NewProject extends Component {
                       Porcelain
                     </Option>
                     <Option value="69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain">
-                      69-946 12x24 Mayfair Zebrino HD Polished Rect.
-                      Porcelain
+                      69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain
                     </Option>
                   </Select>
                 </FormItem>
               </Col>
-              <Col span={10}>
-                <FormItem    label="Item Product"   autosize={false}   width="100%"   placeholder=" Item  Code" >
+              <Col span={9}>
+                <FormItem
+                  label="Item Product"
+                  autosize={false}
+                  width="100%"
+                  placeholder=" Item  Code"
+                >
+                  <ProductRemoteSelect
+                    size="large"
+                    autosize={false}
+                    width="100%"
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={4}>
+                <FormItem
+                  label="Brand Name"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  //help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Input
+                    size="default"
+                    name="p_brand_name"
+                    autoComplete="off"
+                    placeholder="Brand Name"
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
+                  />
+                </FormItem>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={4}>
+                <FormItem
+                  label="Quantity"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  //help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Input
+                    size="default"
+                    name="p_quantity"
+                    autoComplete="off"
+                    placeholder="quantity"
+                    onChange={event =>
+                      this.onSelectChanged(event, this.validateName)
+                    }
+                  />
+                </FormItem>
+              </Col>
+
+              <Col span={4}>
+                <FormItem
+                  label="UnitOfM"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  //help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Select
+                    size="default"
+                    name="p_uofm"
+                    placeholder="Unit Of Measure"
+                  >
+                    <Option value={"    boxes        "}>
+                      {"    boxes        "}
+                    </Option>
+                    <Option value="  sq ft      ">{" sq ft    "}</Option>
+                    <Option value="blocks"> {"    blocks        "}</Option>
+                  </Select>
+                </FormItem>
+              </Col>
+
+              <Col span={6}>
+                <FormItem label="Submitted Date">
+                  <DatePicker
+                    size="default"
+                    defaultValue={moment("2019/04/20", dateFormat)}
+                    format={dateFormat}
+                    onChange={event => this.onSelectChanged(event)}
+                  />
+                </FormItem>
+              </Col>
+              <Col span={4}>
+                <FormItem
+                  label="Toronto"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  //help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Input
+                    size="default"
+                    name="p_toronto_inventory_percentage"
+                    autoComplete="off"
+                    placeholder="toronto"
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
+                  />
+                </FormItem>
+              </Col>
+              <Col span={4}>
+                <FormItem
+                  label="Direct"
+                  hasFeedback
+                  //validateStatus={this.state.email.validateStatus}
+                  //help={this.state.project_details.project_city.errorMsg}
+                >
+                  <Input
+                    size="default"
+                    name="p_direct_import_percentage"
+                    autoComplete="off"
+                    placeholder="direct"
+                    onChange={event =>
+                      this.handleInputChange(event, this.validateName)
+                    }
+                  />
+                </FormItem>
+              </Col>
+            </Row>
+            <br />
+            <br />
+            <br />
+            <br />
+            <Row>
+              <Col span={9}>
+                <FormItem label="Product Description">
+                  <Select
+                    size="default"
+                    name="product_desc"
+                    placeholder="product Description"
+                    autosize={false}
+                    width="100%"
+                    //notFoundContent={
+                    //  fetching ? <Spin size="small" /> : null
+                    // }
+                    onSearch={this.onSelectProduct}
+                    onChange={this.handleSelectChanged}
+                  >
+                    <Option value="69-954 12x24 Mayfair Strada Ash HD Rectified Porcelain">
+                      69-954 12x24 Mayfair Strada Ash HD Rectified Porcelain
+                    </Option>
+                    <Option value="69-346 12x24 Mayfair Statuario Venato HD Rectified Porcelain">
+                      69-346 12x24 Mayfair Statuario Venato HD Rectified
+                      Porcelain
+                    </Option>
+                    <Option value="69-894 12x24 Mayfair Volakas Grigio HD Polished Rect. Porcelain">
+                      69-894 12x24 Mayfair Volakas Grigio HD Polished Rect.
+                      Porcelain
+                    </Option>
+                    <Option value="69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain">
+                      69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain
+                    </Option>
+                  </Select>
+                </FormItem>
+              </Col>
+              <Col span={9}>
+                <FormItem
+                  label="Item Product"
+                  autosize={false}
+                  width="100%"
+                  placeholder=" Item  Code"
+                >
                   <ProductRemoteSelect
                     size="large"
                     autosize={false}
