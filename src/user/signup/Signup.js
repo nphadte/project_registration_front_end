@@ -190,7 +190,7 @@ class Signup extends Component {
                 size="large"
                 name="company"
                 autoComplete="off"
-                placeholder="Your Comapny name"
+                placeholder="Your Company name"
                 value={this.state.company.value}
                 onChange={event =>
                   this.handleInputChange(event, this.validateName)

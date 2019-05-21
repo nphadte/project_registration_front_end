@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import "./NewProject.css";
 import moment from "moment";
 import { submitProject } from "../util/APIUtils";
-import { ACCESS_TOKEN } from "../constants/index";
 import "antd/dist/antd.css";
 import { Link } from "react-router-dom";
+import ProductRemoteSelect from "./ProductRemoteSelect";
+import UserRemoteSelect from "./UserRemoteSelect";
 
 import {
   NAME_MIN_LENGTH,
@@ -27,7 +28,8 @@ import {
   Tooltip,
   Icon,
   AutoComplete,
-  Select
+  Select,
+  Spin
 } from "antd";
 
 const FormItem = Form.Item;
@@ -104,10 +106,19 @@ class NewProject extends Component {
     this.onChange = this.onChange.bind(this);
     this.onDateChanged = this.onDateChanged.bind(this);
     this.onSelectChanged = this.onSelectChanged.bind(this);
+    this.handleSelectChanged = this.handleSelectChanged.bind(this);
   }
+
+  SelectProduct = () => {
+    console.log("onSelectProduct is selected");
+  };
 
   onSelectChanged = (name, value1) => {
     console.log("Input is :" + name + " and value is:" + value1);
+  };
+
+  handleSelectChanged = () => {
+    console.log("  Select dropdown has been selected :");
   };
 
   onDateChanged = id => {
@@ -138,7 +149,7 @@ class NewProject extends Component {
     const target = event.target;
     const inputName = target.name;
     const inputValue = target.value;
-   //console.log("Target is :" + target + ":" + inputName + ":" + inputValue);
+    //console.log("Target is :" + target + ":" + inputName + ":" + inputValue);
     this.setState({
       [inputName]: {
         value: inputValue,
@@ -387,7 +398,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={8}>
                 <FormItem label="Zip" hasFeedback>
                   <Input
@@ -409,7 +419,9 @@ class NewProject extends Component {
                     name=" project_tile_install_date"
                     //defaultValue={moment("2019/04/20", dateFormat)}
                     format={dateFormat}
-                    onChange={this.onDateChanged("project_tile_install_date")}
+                    onChange={this.onDateChanged(
+                      "project_tile_install_date"
+                    )}
                   />
                 </FormItem>
               </Col>
@@ -1120,17 +1132,20 @@ class NewProject extends Component {
             </Row>
             <h2> Product Specifications</h2>
             <Row>
-              <Col span={13}>
+              <Col span={10}>
                 <FormItem label="Product Description">
                   <Select
                     size="default"
                     name="product_desc"
                     placeholder="product Description"
+                    autosize={false}
+                    width="100%"
+                    //notFoundContent={
+                    //  fetching ? <Spin size="small" /> : null
+                    // }
+                    onSearch={this.onSelectProduct}
+                    onChange={this.handleSelectChanged}
                   >
-                    <Option value="69-346 12x24 Mayfair Statuario Venato HD Rectified Porcelain">
-                      Mayfair Statuario Venato HD Rectified Porcelain
-                    </Option>
-
                     <Option value="69-954 12x24 Mayfair Strada Ash HD Rectified Porcelain">
                       69-954 12x24 Mayfair Strada Ash HD Rectified Porcelain
                     </Option>
@@ -1143,32 +1158,28 @@ class NewProject extends Component {
                       Porcelain
                     </Option>
                     <Option value="69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain">
-                      69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain
+                      69-946 12x24 Mayfair Zebrino HD Polished Rect.
+                      Porcelain
                     </Option>
                   </Select>
                 </FormItem>
               </Col>
-              <Col span={5}>
+              <Col span={10}>
                 <FormItem
-                  label="Item"
-                  hasFeedback
-                  validateStatus={
-                    this.state.product_specs[0].p_product.validateStatus
-                  }
-                  help={this.state.product_specs[0].p_product.errorMsg}
+                  label="Item Product"
+                  autosize={false}
+                  width="100%"
+                  placeholder=" Item    kjjhkkjkjjkjkjkjk   uct Description"
                 >
-                  <Input
-                    size="default"
-                    name="p_product"
-                    autoComplete="off"
-                    placeholder="Item"
-                    onChange={event =>
-                      this.handleInputChange(event, this.validateName)
-                    }
+                  <ProductRemoteSelect
+                    size="large"
+                    autosize={false}
+                    width="100%"
                   />
                 </FormItem>
               </Col>
-              <Col span={5}>
+
+              <Col span={4}>
                 <FormItem
                   label="Brand Name"
                   hasFeedback
@@ -1177,9 +1188,9 @@ class NewProject extends Component {
                 >
                   <Input
                     size="default"
-                    name="brand_name"
+                    name="p_brand_name"
                     autoComplete="off"
-                    placeholder="description"
+                    placeholder="Brand Name"
                     onChange={event =>
                       this.handleInputChange(event, this.validateName)
                     }
@@ -1275,9 +1286,6 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
             </Row>
-
-
-            
 
             <FormItem>
               <Button
