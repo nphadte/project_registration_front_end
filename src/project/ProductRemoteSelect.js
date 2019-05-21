@@ -58,18 +58,10 @@ class ProductRemoteSelect extends Component {
         onSearch={this.fetchProduct}
         onChange={this.handleChange}
       >
-        <Option value="22-955 12x24 Mayfair Zebrino HD Rectified Porcelain">
-          '22-955 12x24 Mayfair Zebrino HD Rectified Porcelain'
-        </Option>
-        <Option value="44-947 12x24 Mayfair Suave Bianco HD Polished Rect. Porcelainn">
-          '44-947 12x24 Mayfair Suave Bianco HD Polished Rect. Porcelain'
-        </Option>
-        <Option value="66-892 12x24 Mayfair Calacatta Oro HD Polished Rect. Porcelain">
-          '66-892 12x24 Mayfair Calacatta Oro HD Polished Rect. Porcelain'
-        </Option>
-        <Option value="89-369 12x24 Belgian Linen Ivory HD Rectified Porcelain Tile">
-          '77-369 12x24 Belgian Linen Ivory HD Rectified Porcelain Tile'
-        </Option>
+        <Option value="4500-0421-0">'4500-0421-0'</Option>
+        <Option value="4500-0420-0">'4500-0420-0'</Option>
+        <Option value="4500-0411-0">'4500-0411-0'</Option>
+        <Option value="4500-0405-0">'4500-0405-0'</Option>
       </Select>
     );
   }

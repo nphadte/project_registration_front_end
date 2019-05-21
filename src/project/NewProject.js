@@ -1165,12 +1165,7 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
               <Col span={10}>
-                <FormItem
-                  label="Item Product"
-                  autosize={false}
-                  width="100%"
-                  placeholder=" Item    kjjhkkjkjjkjkjkjk   uct Description"
-                >
+                <FormItem    label="Item Product"   autosize={false}   width="100%"   placeholder=" Item  Code" >
                   <ProductRemoteSelect
                     size="large"
                     autosize={false}
