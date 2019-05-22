@@ -332,6 +332,7 @@ class NewProject extends Component {
                     autoComplete="off"
                     type="text"
                     placeholder="Project Name"
+                    value={this.state.project_name.value}
                     onChange={event =>
                       this.handleInputChange(event, this.validateName)
                     }
@@ -350,6 +351,7 @@ class NewProject extends Component {
                     name="project_address"
                     autoComplete="off"
                     placeholder="Address"
+                    value={this.state.project_address.value}
                     onChange={event =>
                       this.handleInputChange(event, this.validateName)
                     }
@@ -368,6 +370,7 @@ class NewProject extends Component {
                     name="project_city"
                     autoComplete="off"
                     placeholder="City"
+                    value={this.state.project_city.value}
                     validateStatus={this.state.project_city.validateStatus}
                     onChange={event =>
                       this.handleInputChange(event, this.validateName)
@@ -412,7 +415,6 @@ class NewProject extends Component {
                   <DatePicker
                     size="large"
                     name=" project_tile_install_date"
-                    //defaultValue={moment("2019/04/20", dateFormat)}
                     format={dateFormat}
                     onChange={this.onDateChanged("project_tile_install_date")}
                   />

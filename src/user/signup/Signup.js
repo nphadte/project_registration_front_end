@@ -47,7 +47,9 @@ class Signup extends Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.validateUsernameAvailability = this.validateUsernameAvailability.bind(this);
+    this.validateUsernameAvailability = this.validateUsernameAvailability.bind(
+      this
+    );
     this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
     this.isFormInvalid = this.isFormInvalid.bind(this);
   }
@@ -419,7 +421,7 @@ class Signup extends Component {
       };
     } else if (password.length > PASSWORD_MAX_LENGTH) {
       return {
-        validationStatus: "error",
+        validateStatus: "error",
         errorMsg: `Password is too long (Maximum ${PASSWORD_MAX_LENGTH} characters allowed.)`
       };
     } else {
