@@ -6,15 +6,12 @@ import "antd/dist/antd.css";
 import { Link } from "react-router-dom";
 import ProductRemoteSelect from "./ProductRemoteSelect";
 import UserRemoteSelect from "./UserRemoteSelect";
+import { getUserProfile } from "../util/APIUtils";
 
 import {
   NAME_MIN_LENGTH,
   NAME_MAX_LENGTH,
-  USERNAME_MIN_LENGTH,
-  USERNAME_MAX_LENGTH,
-  EMAIL_MAX_LENGTH,
-  PASSWORD_MIN_LENGTH,
-  PASSWORD_MAX_LENGTH
+  EMAIL_MAX_LENGTH
 } from "../constants/index";
 
 import {
@@ -117,8 +114,10 @@ class NewProject extends Component {
     console.log("Input is :" + name + " and value is:" + value1);
   };
 
-  handleSelectChanged = () => {
-    console.log("  Select dropdown has been selected :");
+  handleSelectChanged = value => {
+    console.log(
+      " Select drop-down has been selected  and the value is :" + ` ${value}`
+    );
   };
 
   onDateChanged = id => {
@@ -126,11 +125,9 @@ class NewProject extends Component {
     var self = this;
     let dtstr = "";
     return function(mmst, ds) {
-      //console.log(" The id in function is :" + JSON.stringify(id));
       console.log(" The id in function is :" + id);
       dtstr = ds;
       console.log(" The dateString  in function value is :" + ds + ":" + dtstr);
-
       self.setState({
         [id]: {
           value: ds
@@ -323,7 +320,6 @@ class NewProject extends Component {
                   />
                 </Form.Item>
               </Col>
-
               <Col span={6}>
                 <Form.Item
                   label="Project Name"
@@ -411,7 +407,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={8}>
                 <FormItem label="Tile Install Date">
                   <DatePicker
@@ -439,7 +434,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem label=" Architect Last  Name">
                   <Input
@@ -488,7 +482,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem
                   label="Email"
@@ -524,7 +517,6 @@ class NewProject extends Component {
                   />
                 </Form.Item>
               </Col>
-
               <Col span={5}>
                 <Form.Item
                   label="City"
@@ -577,7 +569,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem
                   label="Web Site"
@@ -612,7 +603,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem
                   label="Last Name"
@@ -647,7 +637,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={4}>
                 <FormItem
                   label="Phone"
@@ -665,7 +654,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem
                   label="Email"
@@ -701,7 +689,6 @@ class NewProject extends Component {
                   />
                 </Form.Item>
               </Col>
-
               <Col span={5}>
                 <Form.Item
                   label="City"
@@ -754,7 +741,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem
                   label="Web Site"
@@ -790,7 +776,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem
                   label="Last Name"
@@ -826,7 +811,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={4}>
                 <FormItem
                   label="Phone"
@@ -845,7 +829,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem
                   label="Email"
@@ -967,7 +950,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem
                   label="Last Name"
@@ -1004,7 +986,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={4}>
                 <FormItem
                   label="Phone"
@@ -1023,7 +1004,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem
                   label="Email"
@@ -1060,7 +1040,6 @@ class NewProject extends Component {
                   />
                 </Form.Item>
               </Col>
-
               <Col span={5}>
                 <Form.Item
                   label="City"
@@ -1113,7 +1092,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={5}>
                 <FormItem label="Web Site" hasFeedback>
                   <Input
@@ -1130,7 +1108,7 @@ class NewProject extends Component {
             </Row>
             <h2> Product Specifications</h2>
             <Row>
-              <Col span={9}>
+              <Col span={10}>
                 <FormItem label="Product Description">
                   <Select
                     size="default"
@@ -1161,21 +1139,11 @@ class NewProject extends Component {
                   </Select>
                 </FormItem>
               </Col>
-              <Col span={9}>
-                <FormItem
-                  label="Item Product"
-                  autosize={false}
-                  width="100%"
-                  placeholder=" Item  Code"
-                >
-                  <ProductRemoteSelect
-                    size="large"
-                    autosize={false}
-                    width="100%"
-                  />
-                </FormItem>
+              <Col span={6}>
+                <Form.Item label="Item Code">
+                  <Input size="default" name="prod_Item_code" />
+                </Form.Item>
               </Col>
-
               <Col span={4}>
                 <FormItem
                   label="Brand Name"
@@ -1214,7 +1182,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={4}>
                 <FormItem
                   label="UnitOfM"
@@ -1235,7 +1202,6 @@ class NewProject extends Component {
                   </Select>
                 </FormItem>
               </Col>
-
               <Col span={6}>
                 <FormItem label="Submitted Date">
                   <DatePicker
@@ -1372,7 +1338,6 @@ class NewProject extends Component {
                   />
                 </FormItem>
               </Col>
-
               <Col span={4}>
                 <FormItem
                   label="UnitOfM"
@@ -1393,7 +1358,6 @@ class NewProject extends Component {
                   </Select>
                 </FormItem>
               </Col>
-
               <Col span={6}>
                 <FormItem label="Submitted Date">
                   <DatePicker
@@ -1441,7 +1405,6 @@ class NewProject extends Component {
                 </FormItem>
               </Col>
             </Row>
-
             <FormItem>
               <Button
                 type="primary"
