@@ -25,6 +25,13 @@ const request = options => {
   );
 };
 
+export function getAllProducts() {
+  return request({
+    url: "http://localhost:8443/api/inventory/getAllProducts",
+    method: "GET"
+  });
+}
+
 export function getAllPolls(page, size) {
   page = page || 0;
   size = size || POLL_LIST_SIZE;

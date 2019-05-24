@@ -6,7 +6,7 @@ import "antd/dist/antd.css";
 import { Link } from "react-router-dom";
 import ProductRemoteSelect from "./ProductRemoteSelect";
 import UserRemoteSelect from "./UserRemoteSelect";
-import { getUserProfile } from "../util/APIUtils";
+import { getUserProfile, getAllProducts } from "../util/APIUtils";
 
 import {
   NAME_MIN_LENGTH,
@@ -38,6 +38,32 @@ class NewProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      product_data: [],
+
+      //
+      //product_data: [{
+      //   "Id": 1,
+      //   "product_desc": "M1-0809 25\"x25\" Display Boards - Soho - 2 Boards (BPI)",
+      //    "item_code": "9902-0765-0"
+      //},
+      // {
+      //    "Id": 2,
+      //    "product_desc": "62-027 6\"x6\" Ottomano Walnut HD Porcelain Tile",
+      //    "item_code": "4500-0502-0"
+      // },
+      // {
+      //     "Id": 3,
+      //     "product_desc": "63-289 12\"x12\" Ottomano Walnut HD Porcelain Tile",
+      //     "item_code": "4500-0503-0"
+      // },
+      // {
+      //    "Id": 4,
+      //     "product_desc": "67-071 18\"x18\" Ottomano Walnut HD Porcelain Tile",
+      //     "item_code": "4500-0504-0"
+      // }],
+      //
+      //
+
       userId: { value: "" },
       company: { value: "" },
       project_date: { value: moment(currentDate, dateFormat) },
@@ -104,7 +130,68 @@ class NewProject extends Component {
     this.onDateChanged = this.onDateChanged.bind(this);
     this.onSelectChanged = this.onSelectChanged.bind(this);
     this.handleSelectChanged = this.handleSelectChanged.bind(this);
+    this.loadAllProducts = this.loadAllProducts.bind(this);
   }
+
+  componentDidMount() {
+    let initialproducts = [
+      {
+        Id: "",
+        product_desc: "",
+        item_code: ""
+      }
+    ];
+    var i = 0;
+    getAllProducts().then(response => {
+      console.log("The response is :" + JSON.stringify(response));
+      //  var i = 0;
+      for (const product of response) {
+        console.log("Id is  :" + product.Id);
+        console.log("product desc is  :" + product.product_desc);
+        console.log("The value of i   is :" + i);
+        initialproducts[i].Id = product.Id;
+        initialproducts[i].product_desc = product.product_desc;
+        initialproducts[i].item_code = product.item_code;
+       // i++;
+      }
+
+      for (let m = 0; m < initialproducts.length; m++) {
+        console.log(
+          "product desc is  :" + m + ":   :" + initialproducts[m].product_desc
+        );
+      }
+      this.setState({
+        product_data: [...this.state.product_data, ...initialproducts]
+      });
+    });
+  }
+
+  loadAllProducts = () => {
+    console.log("The  dropdown button is being seaerched");
+    getAllProducts()
+      .then(response => {
+        console.log("response is  :" + JSON.stringify(response));
+
+        this.setState({
+          product_data: [...response]
+        });
+
+        for (let i in response) {
+          //this.state.product_data = [...response];
+          console.log(
+            "The  *********:" +
+              i +
+              "th product_desc and  item_code  :" +
+              this.state.product_data[i].product_desc +
+              ":" +
+              this.state.product_data[i].item_code
+          );
+        }
+      })
+      .catch(error => {
+        console.log("An error was thrown while retreiving ");
+      });
+  };
 
   SelectProduct = () => {
     console.log("onSelectProduct is selected");
@@ -1113,6 +1200,7 @@ class NewProject extends Component {
               <Col span={10}>
                 <FormItem label="Product Description">
                   <Select
+                    label="product_desc"
                     size="default"
                     name="product_desc"
                     placeholder="product Description"
@@ -1121,29 +1209,22 @@ class NewProject extends Component {
                     //notFoundContent={
                     //  fetching ? <Spin size="small" /> : null
                     // }
-                    onSearch={this.onSelectProduct}
+                    onSearch={this.loadAllProducts}
                     onChange={this.handleSelectChanged}
                   >
-                    <Option value="69-954 12x24 Mayfair Strada Ash HD Rectified Porcelain">
-                      69-954 12x24 Mayfair Strada Ash HD Rectified Porcelain
-                    </Option>
-                    <Option value="69-346 12x24 Mayfair Statuario Venato HD Rectified Porcelain">
-                      69-346 12x24 Mayfair Statuario Venato HD Rectified
-                      Porcelain
-                    </Option>
-                    <Option value="69-894 12x24 Mayfair Volakas Grigio HD Polished Rect. Porcelain">
-                      69-894 12x24 Mayfair Volakas Grigio HD Polished Rect.
-                      Porcelain
-                    </Option>
-                    <Option value="69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain">
-                      69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain
-                    </Option>
+                    {this.state.product_data.map(d => (
+                      <Option key={d.product_desc}> {d.product_desc}</Option>
+                    ))}
                   </Select>
                 </FormItem>
               </Col>
               <Col span={6}>
                 <Form.Item label="Item Code">
-                  <Input size="default" name="prod_Item_code" />
+                  <Input
+                    size="default"
+                    name="prod_Item_code"
+                    value="456768778  "
+                  />
                 </Form.Item>
               </Col>
               <Col span={4}>
@@ -1195,6 +1276,7 @@ class NewProject extends Component {
                     size="default"
                     name="p_uofm"
                     placeholder="Unit Of Measure"
+                    onSearch={this.onSelectProduct}
                   >
                     <Option value={"    boxes        "}>
                       {"    boxes        "}
