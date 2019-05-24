@@ -476,7 +476,9 @@ class NewProject extends Component {
                     size="large"
                     name=" project_tile_install_date"
                     format={dateFormat}
-                    onChange={this.onDateChanged("project_tile_install_date")}
+                    onChange={this.onDateChanged(
+                      "project_tile_install_date"
+                    )}
                   />
                 </FormItem>
               </Col>
@@ -1186,7 +1188,10 @@ class NewProject extends Component {
                     onChange={this.handleSelectChanged}
                   >
                     {this.state.product_data.map(d => (
-                      <Option key={d.product_desc}> {d.product_desc}</Option>
+                      <Option key={d.product_desc}>
+                        {" "}
+                        {d.product_desc}
+                      </Option>
                     ))}
                   </Select>
                 </FormItem>
@@ -1322,23 +1327,15 @@ class NewProject extends Component {
                     //notFoundContent={
                     //  fetching ? <Spin size="small" /> : null
                     // }
-                    onSearch={this.onSelectProduct}
+                    onSearch={this.loadAllProducts}
                     onChange={this.handleSelectChanged}
                   >
-                    <Option value="69-954 12x24 Mayfair Strada Ash HD Rectified Porcelain">
-                      69-954 12x24 Mayfair Strada Ash HD Rectified Porcelain
-                    </Option>
-                    <Option value="69-346 12x24 Mayfair Statuario Venato HD Rectified Porcelain">
-                      69-346 12x24 Mayfair Statuario Venato HD Rectified
-                      Porcelain
-                    </Option>
-                    <Option value="69-894 12x24 Mayfair Volakas Grigio HD Polished Rect. Porcelain">
-                      69-894 12x24 Mayfair Volakas Grigio HD Polished Rect.
-                      Porcelain
-                    </Option>
-                    <Option value="69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain">
-                      69-946 12x24 Mayfair Zebrino HD Polished Rect. Porcelain
-                    </Option>
+                    {this.state.product_data.map(d => (
+                      <Option key={d.product_desc}>
+                        {" "}
+                        {d.product_desc}
+                      </Option>
+                    ))}
                   </Select>
                 </FormItem>
               </Col>
