@@ -38,32 +38,13 @@ class NewProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product_data: [],
-
-      //
-      //product_data: [{
-      //   "Id": 1,
-      //   "product_desc": "M1-0809 25\"x25\" Display Boards - Soho - 2 Boards (BPI)",
-      //    "item_code": "9902-0765-0"
-      //},
-      // {
-      //    "Id": 2,
-      //    "product_desc": "62-027 6\"x6\" Ottomano Walnut HD Porcelain Tile",
-      //    "item_code": "4500-0502-0"
-      // },
-      // {
-      //     "Id": 3,
-      //     "product_desc": "63-289 12\"x12\" Ottomano Walnut HD Porcelain Tile",
-      //     "item_code": "4500-0503-0"
-      // },
-      // {
-      //    "Id": 4,
-      //     "product_desc": "67-071 18\"x18\" Ottomano Walnut HD Porcelain Tile",
-      //     "item_code": "4500-0504-0"
-      // }],
-      //
-      //
-
+  //    product_data: [],
+   product_data: [{
+         "Id": 1,
+         "product_desc": "M1-0809 25\"x25\" Display Boards - Soho - 2 Boards (BPI)",
+          "item_code": "9902-0765-0"
+      }],
+   
       userId: { value: "" },
       company: { value: "" },
       project_date: { value: moment(currentDate, dateFormat) },
@@ -134,39 +115,31 @@ class NewProject extends Component {
   }
 
   componentDidMount() {
-    let initialproducts = [
-      {
-        Id: "",
-        product_desc: "",
-        item_code: ""
-      }
-    ];
+   
     var i = 0;
     getAllProducts().then(response => {
       console.log("The response is :" + JSON.stringify(response));
-      //  var i = 0;
-      for (const product of response) {
-        console.log("Id is  :" + product.Id);
-        console.log("product desc is  :" + product.product_desc);
-        console.log("The value of i   is :" + i);
-        initialproducts[i].Id = product.Id;
-        initialproducts[i].product_desc = product.product_desc;
-        initialproducts[i].item_code = product.item_code;
-       // i++;
-      }
+    
+       this.state.product_data = response.map(product => ({
+        Id: `${product.Id}`,
+        product_desc: product.product_desc,
+        item_code: product.item_code,
+      }));
 
-      for (let m = 0; m < initialproducts.length; m++) {
-        console.log(
-          "product desc is  :" + m + ":   :" + initialproducts[m].product_desc
-        );
+      this.setState({ product_data:  [...this.state.product_data] });
+      console.log("The lenmgth of populated array is : " + this.state.product_data.length);
+      for ( let u = 0; u < this.state.product_data.length ; u++){
+        console.log("The item_code is : " + this.state.product_data[u].item_code);
       }
-      this.setState({
-        product_data: [...this.state.product_data, ...initialproducts]
-      });
     });
-  }
+   
+    };
 
   loadAllProducts = () => {
+   console.log("The  dropdown button is being seaerched");
+  };
+  
+  loadAllProducts_Bk = () => {
     console.log("The  dropdown button is being seaerched");
     getAllProducts()
       .then(response => {
@@ -1198,7 +1171,7 @@ class NewProject extends Component {
             <h2> Product Specifications</h2>
             <Row>
               <Col span={10}>
-                <FormItem label="Product Description">
+                <FormItem label="Product Description 1">
                   <Select
                     label="product_desc"
                     size="default"
@@ -1339,7 +1312,7 @@ class NewProject extends Component {
             <br />
             <Row>
               <Col span={9}>
-                <FormItem label="Product Description">
+                <FormItem label="Product Description  2">
                   <Select
                     size="default"
                     name="product_desc"
@@ -1374,7 +1347,7 @@ class NewProject extends Component {
                   label="Item Product"
                   autosize={false}
                   width="100%"
-                  placeholder=" Item  Code"
+                  placeholder=" Item  Code 2"
                 >
                   <ProductRemoteSelect
                     size="large"
