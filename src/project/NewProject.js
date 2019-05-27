@@ -4,8 +4,6 @@ import moment from "moment";
 import { submitProject } from "../util/APIUtils";
 import "antd/dist/antd.css";
 import { Link } from "react-router-dom";
-import ProductRemoteSelect from "./ProductRemoteSelect";
-import UserRemoteSelect from "./UserRemoteSelect";
 import { getUserProfile, getAllProducts } from "../util/APIUtils";
 
 import {
@@ -98,12 +96,24 @@ class NewProject extends Component {
       t_website: { value: "" },
       product_specs: [
         {
-          p_product: { value: "" },
-          p_quantity: { value: "" },
-          p_uofm: { value: "" },
-          p_sample_submt_date: { value: "" },
-          p_toronto_inventory_percentage: { value: "" },
-          p_direct_import_percentage: { value: "" }
+          p_product_1: { value: "" },
+          p_item_code_1: { value: "item_code1" },
+          p_brand_1: { value: "" },
+          p_qty_1: { value: "" },
+          p_uofm_1: { value: "" },
+          p_sample_submt_date_1: { value: "" },
+          p_toronto_inventory_percentage_1: { value: "" },
+          p_direct_import_percentage_1: { value: "" }
+        },
+        {
+          p_product_2: { value: "" },
+          p_item_code_2: { value: "item_code2" },
+          p_brand_2: { value: "" },
+          p_qty_2: { value: "" },
+          p_uofm_2: { value: "" },
+          p_sample_submt_date_2: { value: "" },
+          p_toronto_inventory_percentage_2: { value: "" },
+          p_direct_import_percentage_2: { value: "" }
         }
       ]
     };
@@ -112,7 +122,8 @@ class NewProject extends Component {
     this.onChange = this.onChange.bind(this);
     this.onDateChanged = this.onDateChanged.bind(this);
     this.onSelectChanged = this.onSelectChanged.bind(this);
-    this.handleSelectChanged = this.handleSelectChanged.bind(this);
+    this.handleSelect1Changed = this.handleSelect1Changed.bind(this);
+    this.handleSelect2Changed = this.handleSelect2Changed.bind(this);
     this.loadAllProducts = this.loadAllProducts.bind(this);
   }
 
@@ -147,7 +158,6 @@ class NewProject extends Component {
     getAllProducts()
       .then(response => {
         console.log("response is  :" + JSON.stringify(response));
-
         this.setState({
           product_data: [...response]
         });
@@ -177,10 +187,12 @@ class NewProject extends Component {
     console.log("Input is :" + name + " and value is:" + value1);
   };
 
-  handleSelectChanged = value => {
-    console.log(
-      " Select drop-down has been selected  and the value is :" + ` ${value}`
-    );
+  handleSelect1Changed = value => {
+    console.log("   handle  select 1  is :" + `${value}`);
+  };
+
+  handleSelect2Changed = value => {
+    console.log("   handle  select 2  is :" + `${value}`);
   };
 
   onDateChanged = id => {
@@ -332,14 +344,29 @@ class NewProject extends Component {
       },
       product_specs: [
         {
-          p_product: this.state.product_specs[0].p_product.value,
-          p_quantity: this.state.product_specs[0].p_quantity.value,
-          p_uofm: this.state.product_specs[0].p_uofm.value,
-          p_sample_submt_date: this.state.product_specs[0].p_sample_submt_date
+          p_product_1: this.state.product_specs[0].p_product_1.value,
+          p_itemcode_1: this.state.product_specs[0].p_item_code_1.value,
+          p_brand_1: this.state.product_specs[0].p_brand_1.value,
+          p_quantity: this.state.product_specs[0].p_qty_1.value,
+          p_uofm: this.state.product_specs[0].p_uofm1.value,
+          p_sample_submt_date: this.state.product_specs[0].p_sample_submt_date1
             .value,
           p_toronto_inventory_percentage: this.state.product_specs[0]
-            .p_toronto_inventory_percentage.value,
+            .p_toronto_inventory_percentage_1.value,
           p_direct_import_percentage: this.state.product_specs[0]
+            .p_direct_import_percentage.value
+        },
+        {
+          p_product_2: this.state.product_specs[0].p_product.value,
+          p_itemcode_2: this.state.product_specs[0].p_product.value,
+          p_brand_2: this.state.product_specs[0].p_product.value,
+          p_quantity_2: this.state.product_specs[0].p_quantity.value,
+          p_uofm_2: this.state.product_specs[0].p_uofm.value,
+          p_sample_submt_date_2: this.state.product_specs[0].p_sample_submt_date
+            .value,
+          p_toronto_inventory_percentage_2: this.state.product_specs[0]
+            .p_toronto_inventory_percentage.value,
+          p_direct_import_percentage_2: this.state.product_specs[0]
             .p_direct_import_percentage.value
         }
       ]
@@ -1186,10 +1213,10 @@ class NewProject extends Component {
                     //  fetching ? <Spin size="small" /> : null
                     // }
                     onSearch={this.loadAllProducts}
-                    onChange={this.handleSelectChanged}
+                    onChange={this.handleSelect1Changed}
                   >
                     {this.state.product_data.map(d => (
-                      <Option key={d.product_desc}> {d.product_desc}</Option>
+                      <Option value={d.product_desc}> {d.product_desc}</Option>
                     ))}
                   </Select>
                 </FormItem>
@@ -1199,7 +1226,7 @@ class NewProject extends Component {
                   <Input
                     size="default"
                     name="prod_Item_code"
-                    value="456768778  "
+                    value={this.state.product_specs[0].p_item_code_1.value}
                   />
                 </Form.Item>
               </Col>
@@ -1326,10 +1353,10 @@ class NewProject extends Component {
                     //  fetching ? <Spin size="small" /> : null
                     // }
                     onSearch={this.loadAllProducts}
-                    onChange={this.handleSelectChanged}
+                    onChange={this.handleSelect2Changed}
                   >
                     {this.state.product_data.map(d => (
-                      <Option  key={d.product_desc}> {d.product_desc}</Option>
+                      <Option value={d.product_desc}> {d.product_desc}</Option>
                     ))}
                   </Select>
                 </FormItem>
@@ -1341,10 +1368,10 @@ class NewProject extends Component {
                   width="100%"
                   placeholder=" Item  Code 2"
                 >
-                  <ProductRemoteSelect
-                    size="large"
-                    autosize={false}
-                    width="100%"
+                  <Input
+                    size="default"
+                    name="prod_Item_code"
+                    value={this.state.product_specs[1].p_item_code_2.value}
                   />
                 </FormItem>
               </Col>
