@@ -38,13 +38,15 @@ class NewProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-  //    product_data: [],
-   product_data: [{
-         "Id": 1,
-         "product_desc": "M1-0809 25\"x25\" Display Boards - Soho - 2 Boards (BPI)",
-          "item_code": "9902-0765-0"
-      }],
-   
+      // product_data: [],
+      product_data: [
+        {
+          Id: 1,
+          product_desc:
+            'M1-0809 25"x25" Display Boards - Soho - 2 Boards (BPI)',
+          item_code: "9902-0765-0"
+        }
+      ],
       userId: { value: "" },
       company: { value: "" },
       project_date: { value: moment(currentDate, dateFormat) },
@@ -115,30 +117,31 @@ class NewProject extends Component {
   }
 
   componentDidMount() {
-   
     var i = 0;
     getAllProducts().then(response => {
       console.log("The response is :" + JSON.stringify(response));
-    
-       this.state.product_data = response.map(product => ({
+      this.state.product_data = response.map(product => ({
         Id: `${product.Id}`,
         product_desc: product.product_desc,
-        item_code: product.item_code,
+        item_code: product.item_code
       }));
 
-      this.setState({ product_data:  [...this.state.product_data] });
-      console.log("The lenmgth of populated array is : " + this.state.product_data.length);
-      for ( let u = 0; u < this.state.product_data.length ; u++){
-        console.log("The item_code is : " + this.state.product_data[u].item_code);
+      this.setState({ product_data: [...this.state.product_data] });
+      console.log(
+        "The lenmgth of populated array is : " + this.state.product_data.length
+      );
+      for (let u = 0; u < this.state.product_data.length; u++) {
+        console.log(
+          "The item_code is : " + this.state.product_data[u].product_desc
+        );
       }
     });
-   
-    };
+  }
 
   loadAllProducts = () => {
-   console.log("The  dropdown button is being seaerched");
+    console.log("The  dropdown button is being seaerched");
   };
-  
+
   loadAllProducts_Bk = () => {
     console.log("The  dropdown button is being seaerched");
     getAllProducts()
@@ -476,9 +479,7 @@ class NewProject extends Component {
                     size="large"
                     name=" project_tile_install_date"
                     format={dateFormat}
-                    onChange={this.onDateChanged(
-                      "project_tile_install_date"
-                    )}
+                    onChange={this.onDateChanged("project_tile_install_date")}
                   />
                 </FormItem>
               </Col>
@@ -1188,10 +1189,7 @@ class NewProject extends Component {
                     onChange={this.handleSelectChanged}
                   >
                     {this.state.product_data.map(d => (
-                      <Option key={d.product_desc}>
-                        {" "}
-                        {d.product_desc}
-                      </Option>
+                      <Option key={d.product_desc}> {d.product_desc}</Option>
                     ))}
                   </Select>
                 </FormItem>
@@ -1331,10 +1329,7 @@ class NewProject extends Component {
                     onChange={this.handleSelectChanged}
                   >
                     {this.state.product_data.map(d => (
-                      <Option key={d.product_desc}>
-                        {" "}
-                        {d.product_desc}
-                      </Option>
+                      <Option  key={d.product_desc}> {d.product_desc}</Option>
                     ))}
                   </Select>
                 </FormItem>
