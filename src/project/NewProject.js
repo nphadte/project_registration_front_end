@@ -37,6 +37,7 @@ class NewProject extends Component {
     super(props);
     this.state = {
       // product_data: [],
+      fetching: false,
       product_data: [
         {
           Id: 1,
@@ -130,21 +131,24 @@ class NewProject extends Component {
   componentDidMount() {
     var i = 0;
     getAllProducts().then(response => {
-      console.log("The response is :" + JSON.stringify(response));
+      //console.log("The response is :" + JSON.stringify(response));
       this.state.product_data = response.map(product => ({
         Id: `${product.Id}`,
         product_desc: product.product_desc,
         item_code: product.item_code
       }));
 
-      this.setState({ product_data: [...this.state.product_data] });
+      this.setState({
+        product_data: [...this.state.product_data],
+        fetching: true
+      });
       console.log(
         "The lenmgth of populated array is : " + this.state.product_data.length
       );
       for (let u = 0; u < this.state.product_data.length; u++) {
-        console.log(
-          "The item_code is : " + this.state.product_data[u].product_desc
-        );
+        //console.log(
+        //   "The item_code is : " + this.state.product_data[u].product_desc
+        // );
       }
     });
   }
@@ -347,27 +351,27 @@ class NewProject extends Component {
           p_product_1: this.state.product_specs[0].p_product_1.value,
           p_itemcode_1: this.state.product_specs[0].p_item_code_1.value,
           p_brand_1: this.state.product_specs[0].p_brand_1.value,
-          p_quantity: this.state.product_specs[0].p_qty_1.value,
-          p_uofm: this.state.product_specs[0].p_uofm1.value,
-          p_sample_submt_date: this.state.product_specs[0].p_sample_submt_date1
-            .value,
-          p_toronto_inventory_percentage: this.state.product_specs[0]
-            .p_toronto_inventory_percentage_1.value,
-          p_direct_import_percentage: this.state.product_specs[0]
-            .p_direct_import_percentage.value
+          p_quantity: this.state.product_specs[0].p_qty_1.value
+          // p_uofm: this.state.product_specs[0].p_uofm1.value,
+          // p_sample_submt_date: this.state.product_specs[0].p_sample_submt_date1
+          //   .value,
+          // p_toronto_inventory_percentage: this.state.product_specs[0]
+          //   .p_toronto_inventory_percentage_1.value,
+          // p_direct_import_percentage: this.state.product_specs[0]
+          //  .p_direct_import_percentage.value
         },
         {
-          p_product_2: this.state.product_specs[0].p_product.value,
-          p_itemcode_2: this.state.product_specs[0].p_product.value,
-          p_brand_2: this.state.product_specs[0].p_product.value,
-          p_quantity_2: this.state.product_specs[0].p_quantity.value,
-          p_uofm_2: this.state.product_specs[0].p_uofm.value,
-          p_sample_submt_date_2: this.state.product_specs[0].p_sample_submt_date
-            .value,
+          p_product_2: this.state.product_specs[0].p_product_1.value,
+          p_itemcode_2: this.state.product_specs[0].p_item_code_1.value,
+          p_brand_2: this.state.product_specs[0].p_brand_1.value,
+         //p_quantity_2: this.state.product_specs[0].p_qty_2.value,
+          p_uofm_2: this.state.product_specs[0].p_uofm_1.value,
+          //p_sample_submt_date_2: this.state.product_specs[0]
+           // .p_sample_submt_date_2.value,
           p_toronto_inventory_percentage_2: this.state.product_specs[0]
-            .p_toronto_inventory_percentage.value,
+            .p_direct_import_percentage_1.value,
           p_direct_import_percentage_2: this.state.product_specs[0]
-            .p_direct_import_percentage.value
+            .p_direct_import_percentage_2.value
         }
       ]
     };
@@ -506,7 +510,9 @@ class NewProject extends Component {
                     size="large"
                     name=" project_tile_install_date"
                     format={dateFormat}
-                    onChange={this.onDateChanged("project_tile_install_date")}
+                    onChange={this.onDateChanged(
+                      "project_tile_install_date"
+                    )}
                   />
                 </FormItem>
               </Col>
@@ -1206,17 +1212,20 @@ class NewProject extends Component {
                     label="product_desc"
                     size="default"
                     name="product_desc"
-                    placeholder="product Description"
                     autosize={false}
                     width="100%"
                     //notFoundContent={
-                    //  fetching ? <Spin size="small" /> : null
+                    //  this.state.fetching ? <Spin size="small" /> : null
                     // }
+                    notFoundContent={null}
                     onSearch={this.loadAllProducts}
                     onChange={this.handleSelect1Changed}
                   >
                     {this.state.product_data.map(d => (
-                      <Option value={d.product_desc}> {d.product_desc}</Option>
+                      <Option width="100%" value={d.product_desc}>
+                        {" "}
+                        {d.product_desc}
+                      </Option>
                     ))}
                   </Select>
                 </FormItem>
@@ -1252,7 +1261,7 @@ class NewProject extends Component {
             <Row>
               <Col span={4}>
                 <FormItem
-                  label="Quantity"
+                  label="Quantity ( sq. ft )"
                   hasFeedback
                   //validateStatus={this.state.email.validateStatus}
                   //help={this.state.project_details.project_city.errorMsg}
@@ -1266,27 +1275,6 @@ class NewProject extends Component {
                       this.onSelectChanged(event, this.validateName)
                     }
                   />
-                </FormItem>
-              </Col>
-              <Col span={4}>
-                <FormItem
-                  label="UnitOfM"
-                  hasFeedback
-                  //validateStatus={this.state.email.validateStatus}
-                  //help={this.state.project_details.project_city.errorMsg}
-                >
-                  <Select
-                    size="default"
-                    name="p_uofm"
-                    placeholder="Unit Of Measure"
-                    onSearch={this.onSelectProduct}
-                  >
-                    <Option value={"    boxes        "}>
-                      {"    boxes        "}
-                    </Option>
-                    <Option value="  sq ft      ">{" sq ft    "}</Option>
-                    <Option value="blocks"> {"    blocks        "}</Option>
-                  </Select>
                 </FormItem>
               </Col>
               <Col span={6}>
@@ -1348,7 +1336,8 @@ class NewProject extends Component {
                     name="product_desc"
                     placeholder="product Description"
                     autosize={false}
-                    width="100%"
+                    // style={{ width: 220 }}
+                    // defaultValue="25.25x35.7 Snow Polished Engineered Stone Triangle Bench"
                     //notFoundContent={
                     //  fetching ? <Spin size="small" /> : null
                     // }
@@ -1356,7 +1345,10 @@ class NewProject extends Component {
                     onChange={this.handleSelect2Changed}
                   >
                     {this.state.product_data.map(d => (
-                      <Option value={d.product_desc}> {d.product_desc}</Option>
+                      <Option value={d.product_desc}>
+                        {" "}
+                        {d.product_desc}
+                      </Option>
                     ))}
                   </Select>
                 </FormItem>
@@ -1398,7 +1390,7 @@ class NewProject extends Component {
             <Row>
               <Col span={4}>
                 <FormItem
-                  label="Quantity"
+                  label="Quantity ( sq. ft )"
                   hasFeedback
                   //validateStatus={this.state.email.validateStatus}
                   //help={this.state.project_details.project_city.errorMsg}
@@ -1412,26 +1404,6 @@ class NewProject extends Component {
                       this.onSelectChanged(event, this.validateName)
                     }
                   />
-                </FormItem>
-              </Col>
-              <Col span={4}>
-                <FormItem
-                  label="UnitOfM"
-                  hasFeedback
-                  //validateStatus={this.state.email.validateStatus}
-                  //help={this.state.project_details.project_city.errorMsg}
-                >
-                  <Select
-                    size="default"
-                    name="p_uofm"
-                    placeholder="Unit Of Measure"
-                  >
-                    <Option value={"    boxes        "}>
-                      {"    boxes        "}
-                    </Option>
-                    <Option value="  sq ft      ">{" sq ft    "}</Option>
-                    <Option value="blocks"> {"    blocks        "}</Option>
-                  </Select>
                 </FormItem>
               </Col>
               <Col span={6}>
